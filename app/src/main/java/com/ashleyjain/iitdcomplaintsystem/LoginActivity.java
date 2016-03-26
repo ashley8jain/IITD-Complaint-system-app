@@ -1,6 +1,5 @@
 package com.ashleyjain.iitdcomplaintsystem;
 
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -10,6 +9,7 @@ import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.provider.Settings;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -19,9 +19,12 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.RequestQueue;
+import com.android.volley.toolbox.Volley;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.util.Map;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -29,6 +32,9 @@ public class LoginActivity extends AppCompatActivity {
     Button login;
     TextView signup;
 
+    private static final String SET_COOKIE_KEY = "set-cookie";
+    private static final String COOKIE_KEY = "cookie";
+    private static final String SESSION_COOKIE = "session_id_first";
     private static LoginActivity _instance;
     private RequestQueue _requestQueue;
     private SharedPreferences _preferences;
@@ -40,10 +46,14 @@ public class LoginActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
+        final Context context = LoginActivity.this;
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+        _instance = this;
+        _preferences = PreferenceManager.getDefaultSharedPreferences(this);  //for saving cookies
+        _requestQueue = Volley.newRequestQueue(this);
 
-        final Context context = LoginActivity.this;
+
 
         id = (EditText) findViewById(R.id.userid);
         pass = (EditText) findViewById(R.id.password);
@@ -79,11 +89,11 @@ public class LoginActivity extends AppCompatActivity {
                     AlertDialog alertDialog = alertbuilder.create();
                     alertDialog.show();
                 } else {
-                    final ProgressDialog dialog = ProgressDialog.show(context,"", "Authenticating...", true);
+                    final ProgressDialog dialog = ProgressDialog.show(context, "", "Authenticating...", true);
                     username[0] = id.getText().toString();
                     password[0] = pass.getText().toString();
 
-                    String url = "http://10.192.42.105:8000/default/login.json?userid=" + username[0] + "&password=" + password[0];
+                    String url = "http://10.192.40.180:8000/first/default/login.json?userid=" + username[0] + "&password=" + password[0];
 
                     //GET request through stringrequest
                     GETrequest.response(new GETrequest.VolleyCallback() {
@@ -101,7 +111,7 @@ public class LoginActivity extends AppCompatActivity {
                                     final String fname = user.getString("first_name");
                                     final String lname = user.getString("last_name");
                                     final Intent main2frag_intent = new Intent(context, MainActivity.class);
-                                    main2frag_intent.putExtra("name", fname+" "+lname);
+                                    main2frag_intent.putExtra("name", fname + " " + lname);
                                     main2frag_intent.putExtra("username", username);
                                     startActivity(main2frag_intent);
                                 }
@@ -111,20 +121,53 @@ public class LoginActivity extends AppCompatActivity {
                         }
                     }, context, url, dialog);
 
-
                 }
             }
         });
     }
 
-        //Check if there is network connection or not
+    //Check if there is network connection or not
     public static boolean isNetworkConnected(Context con) {
-        ConnectivityManager connMgr = (ConnectivityManager) con.getSystemService(Activity.CONNECTIVITY_SERVICE);
+        ConnectivityManager connMgr = (ConnectivityManager) con.getSystemService(AppCompatActivity.CONNECTIVITY_SERVICE);
         NetworkInfo networkInfo = connMgr.getActiveNetworkInfo();
         if (networkInfo != null && networkInfo.isConnected())
             return true;
         else
             return false;
+    }
+    //checking session cookie
+    public final void checkSessionCookie(Map<String, String> headers) {
+        if (headers.containsKey(SET_COOKIE_KEY)
+                && headers.get(SET_COOKIE_KEY).startsWith(SESSION_COOKIE)) {
+            String cookie = headers.get(SET_COOKIE_KEY);
+            if (cookie.length() > 0) {
+                String[] splitCookie = cookie.split(";");
+                String[] splitSessionId = splitCookie[0].split("=");
+                cookie = splitSessionId[1];
+                SharedPreferences.Editor prefEditor = _preferences.edit();
+                prefEditor.putString(SESSION_COOKIE, cookie);
+                prefEditor.commit();
+            }
+        }
+    }
+
+    /**
+     * Adds session cookie to headers if exists.
+     * @param headers
+     */
+    public final void addSessionCookie(Map<String, String> headers) {
+        String sessionId = _preferences.getString(SESSION_COOKIE, "");
+        if (sessionId.length() > 0) {
+            StringBuilder builder = new StringBuilder();
+            builder.append(SESSION_COOKIE);
+            builder.append("=");
+            builder.append(sessionId);
+            if (headers.containsKey(COOKIE_KEY)) {
+                builder.append("; ");
+                builder.append(headers.get(COOKIE_KEY));
+            }
+            headers.put(COOKIE_KEY, builder.toString());
+        }
     }
 
 

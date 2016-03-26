@@ -45,6 +45,7 @@ public class StringRequest extends com.android.volley.toolbox.StringRequest {
     protected Response<String> parseNetworkResponse(NetworkResponse response) {
         // since we don't know which of the two underlying network vehicles
         // will Volley use, we have to handle and store session cookies manually
+        LoginActivity.get().checkSessionCookie(response.headers);
         Log.d("debug", "checking cookie");
 
         return super.parseNetworkResponse(response);
@@ -62,7 +63,7 @@ public class StringRequest extends com.android.volley.toolbox.StringRequest {
                 || headers.equals(Collections.emptyMap())) {
             headers = new HashMap<String, String>();
         }
-
+        LoginActivity.get().addSessionCookie(headers);
         Log.d("debug", "adding cookie");
 
 
