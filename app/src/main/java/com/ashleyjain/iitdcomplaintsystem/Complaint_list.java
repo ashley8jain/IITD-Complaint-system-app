@@ -2,9 +2,9 @@ package com.ashleyjain.iitdcomplaintsystem;
 
 import android.app.ProgressDialog;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentTransaction;
-import android.support.v4.app.ListFragment;
+import android.app.Fragment;
+import android.app.FragmentTransaction;
+import android.app.ListFragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,7 +22,8 @@ import java.util.List;
 public class Complaint_list extends ListFragment {
 
     public String cCode;
-    String[] complaintTitle,complaintDescription,complantCreatedAt,complantCreatedBy;
+    String[] complaintTitle,complaintDescription,compliantCreatedAt,compliantCreatedBy;
+    Integer[] complaintId;
     private List<complaintObject> complaintObjectList;
     complaintObjectAdapter adapter;
     @Override
@@ -30,7 +31,7 @@ public class Complaint_list extends ListFragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         cCode = getArguments().getString("cCode");
-        String url = "http://10.192.40.180:8000/first/default/home.json";
+        String url = "http://"+LoginActivity.ip+"/first/default/home.json";
         final ProgressDialog dialog = ProgressDialog.show(getActivity(),"", "Loading.Please wait...", true);
         GETrequest.response(new GETrequest.VolleyCallback() {
             @Override
@@ -42,14 +43,16 @@ public class Complaint_list extends ListFragment {
                     System.out.println(arr);
                     complaintTitle = new String[arr.length()];
                     complaintDescription = new String[arr.length()];
-                    complantCreatedAt = new String[arr.length()];
-                    complantCreatedBy = new String[arr.length()];
+                    compliantCreatedAt = new String[arr.length()];
+                    compliantCreatedBy = new String[arr.length()];
+                    complaintId = new Integer[arr.length()];
                     for (int i = 0; i < arr.length(); i++) {
                         JSONObject ass = arr.getJSONObject(i);
                         complaintTitle[i] = ass.getString("title");
                         complaintDescription[i] = ass.getString("description");
-                        complantCreatedAt[i] = ass.getString("created_at");
-                        complantCreatedBy[i] = ass.getString("user_id");
+                        compliantCreatedAt[i] = ass.getString("created_at");
+                        compliantCreatedBy[i] = ass.getString("user_id");
+                        complaintId[i] = ass.getInt("id");
 
                     }
 
@@ -60,13 +63,12 @@ public class Complaint_list extends ListFragment {
 
                 for (int i = 0; i < complaintTitle.length; i++) {
 
-                    complaintObject items = new complaintObject(complaintTitle[i],complaintDescription[i],complantCreatedAt[i],complantCreatedBy[i]);
+                    complaintObject items = new complaintObject(complaintTitle[i],complaintDescription[i],compliantCreatedAt[i],compliantCreatedBy[i]);
                     complaintObjectList.add(items);
 
                 }
                 System.out.println(complaintObjectList.size());
                 adapter = new complaintObjectAdapter(getActivity(), complaintObjectList);
-///                ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(),android.R.layout.simple_list_item_1,assignName);
                 setListAdapter(adapter);
 
             }
@@ -76,13 +78,13 @@ public class Complaint_list extends ListFragment {
     @Override
     public void onListItemClick(ListView l, View v, int position, long id) {
         super.onListItemClick(l, v, position, id);
-//        Bundle bundle = new Bundle();
-//        AssignmentAdapter fragment = new AssignmentAdapter();
-//        bundle.putString("name" , assignName[position]);
+         Bundle bundle = new Bundle();
+         Specific_complaint fragment = new Specific_complaint();
+         bundle.putInt("id" , complaintId[position]);
 //        bundle.putString("deadline" , assignDeadline[position]);
 //        bundle.putString("description" , assignDescr[position]);
-//        fragment.setArguments(bundle);
-//        replaceFragment(fragment);
+        fragment.setArguments(bundle);
+        replaceFragment(fragment);
 
     }
     @Override
