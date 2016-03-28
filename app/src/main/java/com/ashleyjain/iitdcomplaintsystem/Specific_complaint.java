@@ -21,7 +21,7 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
-;
+
 
 public class Specific_complaint extends ListFragment {
 
@@ -215,7 +215,7 @@ public class Specific_complaint extends ListFragment {
 
     public void replaceFragment(Fragment courseFrag){
         FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
-        fragmentTransaction.replace(R.id.fragment_container, courseFrag, courseFrag.toString());
+        fragmentTransaction.replace(R.id.pager, courseFrag, courseFrag.toString());
         fragmentTransaction.addToBackStack(courseFrag.toString());
         fragmentTransaction.commit();
     }

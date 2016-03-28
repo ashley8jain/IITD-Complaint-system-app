@@ -5,31 +5,40 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.TabLayout;
+import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.CompoundButton;
 import android.widget.Toast;
-
 import com.mikepenz.materialdrawer.AccountHeader;
 import com.mikepenz.materialdrawer.AccountHeaderBuilder;
 import com.mikepenz.materialdrawer.Drawer;
 import com.mikepenz.materialdrawer.DrawerBuilder;
+import com.mikepenz.materialdrawer.interfaces.OnCheckedChangeListener;
 import com.mikepenz.materialdrawer.model.PrimaryDrawerItem;
 import com.mikepenz.materialdrawer.model.ProfileDrawerItem;
 import com.mikepenz.materialdrawer.model.ProfileSettingDrawerItem;
+import com.mikepenz.materialdrawer.model.SecondaryDrawerItem;
+import com.mikepenz.materialdrawer.model.SectionDrawerItem;
+
 import com.mikepenz.materialdrawer.model.interfaces.IDrawerItem;
 import com.mikepenz.materialdrawer.model.interfaces.IProfile;
+import com.mikepenz.materialdrawer.model.interfaces.Nameable;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity  {
+
     protected Drawer drawer = null;
     AccountHeader headerResult= null;
     Context context = MainActivity.this;
     String notJSON;
     String fullname,username;
-
+    public static Integer filter = 0;
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -39,7 +48,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item){
+    public boolean onOptionsItemSelected(MenuItem item) {
         switch(item.getItemId()){
             case R.id.notification:
                 String url3 = "http://"+LoginActivity.ip+"/first/default/notification.json";
@@ -49,7 +58,7 @@ public class MainActivity extends AppCompatActivity {
                     public void onSuccess(String notResult) {
                         System.out.println(notResult);
                         notJSON = notResult;
-                        if (!((getFragmentManager().findFragmentById(R.id.fragment_container)) instanceof NotificationFragment)) {
+                        if (!((getFragmentManager().findFragmentById(R.id.pager)) instanceof NotificationFragment)) {
                             NotificationFragment notifFragment = new NotificationFragment();
                             Bundle bundle = new Bundle();
                             Boolean IsNotif = false;
@@ -60,7 +69,7 @@ public class MainActivity extends AppCompatActivity {
                             bundle.putBoolean("IsNotif", IsNotif);
                             notifFragment.setArguments(bundle);
                             getFragmentManager().beginTransaction()
-                                    .replace(R.id.fragment_container, notifFragment, notifFragment.toString())
+                                    .replace(R.id.pager, notifFragment, notifFragment.toString())
                                     .addToBackStack(notifFragment.toString())
                                     .commit();
                         }
@@ -90,19 +99,42 @@ public class MainActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.this,PostComplaint.class);
+                Intent intent = new Intent(MainActivity.this, PostComplaint.class);
                 startActivity(intent);
             }
         });
 
-        Bundle bundle = new Bundle();
-//      bundle.putString("course_list", courselist_response);
-        Complaint_list fragment = new Complaint_list();
-        fragment.setArguments(bundle);
-        getFragmentManager().beginTransaction()
-                .add(R.id.fragment_container, fragment)
-                .addToBackStack(fragment.toString())
-                .commit();
+        TabLayout tabLayout = (TabLayout) findViewById(R.id.tab_layout);
+
+        tabLayout.addTab(tabLayout.newTab().setText("Individual"));
+        tabLayout.addTab(tabLayout.newTab().setText("Hostel"));
+        tabLayout.addTab(tabLayout.newTab().setText("Institute"));
+
+
+
+        final ViewPager viewPager = (ViewPager) findViewById(R.id.pager);
+        final PagerAdapter adapter = new PagerAdapter(getSupportFragmentManager(), tabLayout.getTabCount());
+        viewPager.setAdapter(adapter);
+        viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
+
+
+        tabLayout.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+            @Override
+            public void onTabSelected(TabLayout.Tab tab) {
+                viewPager.setCurrentItem(tab.getPosition());
+
+            }
+
+            @Override
+            public void onTabUnselected(TabLayout.Tab tab) {
+
+            }
+
+            @Override
+            public void onTabReselected(TabLayout.Tab tab) {
+
+            }
+        });
 
         headerResult = new AccountHeaderBuilder()
                 .withActivity(this)
@@ -148,6 +180,17 @@ public class MainActivity extends AppCompatActivity {
                 .build();
 
 
+        OnCheckedChangeListener onCheckedChangeListener = new OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(IDrawerItem drawerItem, CompoundButton buttonView, boolean isChecked) {
+                if (drawerItem instanceof Nameable) {
+                    Log.i("material-drawer", "DrawerItem: " + ((Nameable) drawerItem).getName() + " - toggleChecked: " + isChecked);
+
+                } else {
+                    Log.i("material-drawer", "toggleChecked: " + isChecked);
+                }
+            }
+        };
         final DrawerBuilder builder = new DrawerBuilder()
                 .withActivity(this)
                 .withDisplayBelowStatusBar(true)
@@ -155,9 +198,15 @@ public class MainActivity extends AppCompatActivity {
                 .withAccountHeader(headerResult)
                 .withHasStableIds(true)
                 .addDrawerItems(
-                        new PrimaryDrawerItem().withName("Individual").withIdentifier(1),
-                        new PrimaryDrawerItem().withName("Hostel").withIdentifier(2),
-                        new PrimaryDrawerItem().withName("Institute").withIdentifier(3));
+                        new SectionDrawerItem().withName("Filter"),
+                        new SecondaryDrawerItem().withName("General").withIdentifier(4),
+                        new SecondaryDrawerItem().withName("Maintenance").withIdentifier(5),
+                        new SecondaryDrawerItem().withName("Mess").withIdentifier(6),
+                        new SecondaryDrawerItem().withName("Sports").withIdentifier(7),
+                        new SecondaryDrawerItem().withName("Cultural").withIdentifier(8)
+                );
+
+
         builder.withOnDrawerItemClickListener(new Drawer.OnDrawerItemClickListener() {
             @Override
             public boolean onItemClick(View v, int position, IDrawerItem drawerItem) {
@@ -165,14 +214,34 @@ public class MainActivity extends AppCompatActivity {
                 switch (position) {
                     default:
 
+                        if(position == 2){
+                                filter =1;
+                            viewPager.invalidate();
+                        }
+                        if(position == 3){
+                             filter =2;
+                             viewPager.invalidate();
+                        }
+                        if(position == 4){
+                             filter =3;
+                             viewPager.invalidate();
+                        }
+                        if(position == 5){
+                             filter =4;
+                             viewPager.invalidate();
+                        }
+                        if(position == 6){
+                             filter =5;
+                             viewPager.invalidate();
+                        }
+
+
                         break;
                 }
                 return false;
             }
         });
         drawer = builder.build();
-//        TextView Name = (TextView) headerResult.getView().findViewById(R.id.material_drawer_account_header_name);
-//        TextView Email = (TextView) headerResult.getView().findViewById(R.id.material_drawer_account_header_name);
 
 
     }

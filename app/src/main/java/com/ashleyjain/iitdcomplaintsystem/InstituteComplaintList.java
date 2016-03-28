@@ -1,15 +1,17 @@
 package com.ashleyjain.iitdcomplaintsystem;
 
 import android.app.ProgressDialog;
+import android.content.Context;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
-import android.app.Fragment;
-import android.app.FragmentTransaction;
-import android.app.ListFragment;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.ListFragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
-
+import android.widget.Toast;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -19,20 +21,20 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class Complaint_list extends ListFragment {
 
+public class InstituteComplaintList extends ListFragment {
     public String cCode;
     String[] complaintTitle,complaintDescription,compliantCreatedAt,compliantCreatedBy;
+    int[] complaintId, complaintVotes;
     Integer[] compliantDepartment;
-    int[] complaintId,complaintVotes;
     private List<complaintObject> complaintObjectList;
     complaintObjectAdapter adapter;
+    Integer filter = MainActivity.filter;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        cCode = getArguments().getString("cCode");
-        String url = "http://"+LoginActivity.ip+"/first/default/home.json";
+
+        String url = "http://"+LoginActivity.ip+"/first/default/home.json?level="+2+"&display_dept="+filter;
         final ProgressDialog dialog = ProgressDialog.show(getActivity(),"", "Loading.Please wait...", true);
         GETrequest.response(new GETrequest.VolleyCallback() {
             @Override
@@ -83,26 +85,17 @@ public class Complaint_list extends ListFragment {
     }
     @Override
     public void onListItemClick(ListView l, View v, int position, long id) {
+
+        Bundle bundle = new Bundle();
+//        Specific_complaint fragment = new Specific_complaint();
+        Intent myIntent = new Intent(getContext(), SpecificComplaint.class);
+        startActivity(myIntent);
+        bundle.putInt("id", complaintId[position]);
+        Toast.makeText(getContext(),Integer.toString(complaintId[position]),Toast.LENGTH_SHORT).show();
         super.onListItemClick(l, v, position, id);
-         Bundle bundle = new Bundle();
-         Specific_complaint fragment = new Specific_complaint();
-         bundle.putInt("id" , complaintId[position]);
-//        bundle.putString("deadline" , assignDeadline[position]);
-//        bundle.putString("description" , assignDescr[position]);
-        fragment.setArguments(bundle);
-        replaceFragment(fragment);
-
-
     }
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-    }
-
-    public void replaceFragment(Fragment courseFrag){
-        FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
-        fragmentTransaction.replace(R.id.pager, courseFrag, courseFrag.toString());
-        fragmentTransaction.addToBackStack(courseFrag.toString());
-        fragmentTransaction.commit();
     }
 }

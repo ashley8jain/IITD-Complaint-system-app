@@ -135,24 +135,6 @@ public class NotificationFragment extends Fragment {
             v= inflater.inflate(android.R.layout.simple_list_item_1, null);
             TextView tv = (TextView) v.findViewById(android.R.id.text1);
             tv.setText(Html.fromHtml(stringArrayList.get(pos)));
-
-
-//            convertView.setOnClickListener(new View.OnClickListener() {
-//                @Override
-//                public void onClick(View view) {
-//                    Scanner in = new Scanner(stringArrayList.get(pos)).useDelimiter("[^0-9]+");
-//                     int integer = in.nextInt();
-//                    FragmentManager fragmentManager = ((Activity) context).getFragmentManager();
-//                    FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-//                    Specific_complaint fragment = new Specific_complaint();
-//                     Bundle bundle = new Bundle();
-//                     bundle.putInt("id", integer);
-//                     fragment.setArguments(bundle);
-//                     fragmentTransaction.addToBackStack(fragment.toString());
-//                     fragmentTransaction.replace(R.id.fragment_container, fragment);
-//                     fragmentTransaction.commit();
-//                }
-//            });
             return v;
         }
 

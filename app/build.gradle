@@ -25,7 +25,6 @@ dependencies {
     compile('com.mikepenz:materialdrawer:5.0.0@aar') {
         transitive = true
     }
-
     compile 'com.android.support:appcompat-v7:23.1.1'
     compile 'com.android.support:design:23.1.1'
     compile 'com.mcxiaoke.volley:library:1.0.15'
