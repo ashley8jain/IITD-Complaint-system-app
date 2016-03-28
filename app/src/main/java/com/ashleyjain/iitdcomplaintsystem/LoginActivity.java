@@ -32,8 +32,6 @@ public class LoginActivity extends AppCompatActivity {
     Button login;
     TextView signup;
 
-    public static final String ip = "10.192.40.180:8000";
-
     private static final String SET_COOKIE_KEY = "set-cookie";
     private static final String COOKIE_KEY = "cookie";
     private static final String SESSION_COOKIE = "session_id_first";
@@ -54,6 +52,8 @@ public class LoginActivity extends AppCompatActivity {
         _instance = this;
         _preferences = PreferenceManager.getDefaultSharedPreferences(this);  //for saving cookies
         _requestQueue = Volley.newRequestQueue(this);
+
+
 
         id = (EditText) findViewById(R.id.userid);
         pass = (EditText) findViewById(R.id.password);
@@ -93,7 +93,7 @@ public class LoginActivity extends AppCompatActivity {
                     username[0] = id.getText().toString();
                     password[0] = pass.getText().toString();
 
-                    String url = "http://"+ ip +"/first/default/login.json?userid=" + username[0] + "&password=" + password[0];
+                    String url = "http://10.192.40.180:8000/first/default/login.json?userid=" + username[0] + "&password=" + password[0];
 
                     //GET request through stringrequest
                     GETrequest.response(new GETrequest.VolleyCallback() {

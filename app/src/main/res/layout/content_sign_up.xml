@@ -51,18 +51,18 @@
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:id="@+id/email"
+            android:hint="Email"/>
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:id="@+id/username"
             android:hint="Username"/>
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/hostelname"
-            android:hint="Hostel Name"/>
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/department"
-            android:hint="Department"/>
+            android:id="@+id/entryno"
+            android:hint="Entry No"/>
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

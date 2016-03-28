@@ -1,6 +1,8 @@
 package com.ashleyjain.iitdcomplaintsystem;
 
 import android.app.ProgressDialog;
+import android.content.Context;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
@@ -8,8 +10,8 @@ import android.support.v4.app.ListFragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.ListView;
-
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -39,7 +41,6 @@ public class Complaint_list extends ListFragment {
                 try {
                     JSONObject jsonObject = new JSONObject(result);
                     JSONArray arr = jsonObject.getJSONArray("my_hostel_complaints");
-                    System.out.println(arr);
                     complaintTitle = new String[arr.length()];
                     complaintDescription = new String[arr.length()];
                     complantCreatedAt = new String[arr.length()];
@@ -59,12 +60,10 @@ public class Complaint_list extends ListFragment {
                 complaintObjectList = new ArrayList<complaintObject>();
 
                 for (int i = 0; i < complaintTitle.length; i++) {
-
                     complaintObject items = new complaintObject(complaintTitle[i],complaintDescription[i],complantCreatedAt[i],complantCreatedBy[i]);
-                    complaintObjectList.add(items);
 
+                    complaintObjectList.add(items);
                 }
-                System.out.println(complaintObjectList.size());
                 adapter = new complaintObjectAdapter(getActivity(), complaintObjectList);
 ///                ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(),android.R.layout.simple_list_item_1,assignName);
                 setListAdapter(adapter);
