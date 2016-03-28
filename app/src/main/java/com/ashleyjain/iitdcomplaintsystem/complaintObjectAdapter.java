@@ -18,6 +18,7 @@ public class complaintObjectAdapter extends BaseAdapter {
 
     Context context;
     List<complaintObject> complaintList;
+
     public complaintObjectAdapter(Context context, List<complaintObject> complaintList) {
         this.context = context;
         this.complaintList = complaintList;
@@ -57,6 +58,5 @@ public class complaintObjectAdapter extends BaseAdapter {
 
         return convertView;
     }
-    public complaintObjectAdapter(FragmentActivity activity, List<complaintObject> complaintObjectList) {
-    }
+
 }
