@@ -84,7 +84,7 @@ public class Specific_complaint extends ListFragment {
                         @Override
                         public void onClick(View v) {
                             final ProgressDialog dialog = ProgressDialog.show(getActivity(), "", "Voting...", true);
-                            String url = "http://"+ LoginActivity.ip +"/first/complaint/upvote?type=1&complaint_id="+cId;
+                            String url = "http://"+ LoginActivity.ip +"/first/complaint/upvote.json?type=1&complaint_id="+cId;
                             //GET request through stringrequest
                             GETrequest.response(new GETrequest.VolleyCallback() {
                                 @Override
@@ -93,11 +93,14 @@ public class Specific_complaint extends ListFragment {
 
                                         JSONObject jsonObject = new JSONObject(result);
                                         String success = jsonObject.getString("success");
+                                        Integer votes = jsonObject.getInt("no_of_votes");
                                         if (success == "false") {
                                             //user inputs are wrong
                                             Toast.makeText(getActivity(), "Fail!!! Try Again!!", Toast.LENGTH_LONG).show();
                                         } else {
-
+                                            TextView votesText = (TextView) getView().findViewById(R.id.no_of_votes);
+                                            if(votes==null){}
+                                            else{ votesText.setText(votes.toString()); }
                                         }
                                     } catch (JSONException e) {
                                         e.printStackTrace();
@@ -113,7 +116,7 @@ public class Specific_complaint extends ListFragment {
                         @Override
                         public void onClick(View v) {
                             final ProgressDialog dialog = ProgressDialog.show(getActivity(), "", "Voting...", true);
-                            String url = "http://" + LoginActivity.ip + "/first/complaint/upvote?type=-1&complaint_id=" + cId;
+                            String url = "http://" + LoginActivity.ip + "/first/complaint/upvote.json?type=-1&complaint_id=" + cId;
                             //GET request through stringrequest
                             GETrequest.response(new GETrequest.VolleyCallback() {
                                 @Override
@@ -122,11 +125,15 @@ public class Specific_complaint extends ListFragment {
 
                                         JSONObject jsonObject = new JSONObject(result);
                                         String success = jsonObject.getString("success");
+                                        Integer votes = jsonObject.getInt("no_of_votes");
+                                        System.out.println("<<<<<-----votes--->>>>>>>>>>>>>"+ votes);
                                         if (success == "false") {
                                             //user inputs are wrong
                                             Toast.makeText(getActivity(), "Fail!!! Try Again!!", Toast.LENGTH_LONG).show();
                                         } else {
-
+                                            TextView votesText = (TextView) getView().findViewById(R.id.no_of_votes);
+                                            if(votes==null){}
+                                            else{ votesText.setText(votes.toString()); }
                                         }
                                     } catch (JSONException e) {
                                         e.printStackTrace();
@@ -203,44 +210,6 @@ public class Specific_complaint extends ListFragment {
                 }, getActivity(), url, dialog);
             }
         });
-
-//        Button delete = (Button) getActivity().findViewById(R.id.comment_button);
-//        delete.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                EditText comment = (EditText) getActivity().findViewById(R.id.comment);
-//                com = comment.getText().toString();
-//                com = com.replace(' ', '+');
-//                Toast.makeText(getActivity(), com, Toast.LENGTH_LONG).show();
-//                final ProgressDialog dialog = ProgressDialog.show(getActivity(), "", "Authenticating...", true);
-//                String url = "http://"+LoginActivity.ip+"/first/default/post_comment.json?complaint_id=" + cId + "&description=" + com;
-//
-//                //GET request through stringrequest
-//                GETrequest.response(new GETrequest.VolleyCallback() {
-//                    @Override
-//                    public void onSuccess(String result) {
-//                        try {
-//
-//                            JSONObject jsonObject = new JSONObject(result);
-//                            String success = jsonObject.getString("success");
-//                            if (success == "false") {
-//                                //user inputs are wrong
-//                                Toast.makeText(getActivity(), "Could not commented!!", Toast.LENGTH_LONG).show();
-//                            } else {
-//                                Toast.makeText(getActivity(), "Commented!!", Toast.LENGTH_LONG).show();
-//                                Specific_complaint fragment = new Specific_complaint();
-//                                Bundle bundle = new Bundle();
-//                                bundle.putInt("id" , cId);
-//                                fragment.setArguments(bundle);
-//                                replaceFragment(fragment);
-//                            }
-//                        } catch (JSONException e) {
-//                            e.printStackTrace();
-//                        }
-//                    }
-//                }, getActivity(), url, dialog);
-//            }
-//        });
 
     }
 

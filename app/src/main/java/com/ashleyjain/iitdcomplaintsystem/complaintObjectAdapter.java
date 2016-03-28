@@ -69,7 +69,7 @@ public class complaintObjectAdapter extends BaseAdapter {
             complaintColorCode.setBackgroundColor(0xFFA6A6A6);
         }
         else{
-            complaintColorCode.setBackgroundColor(colors[s]);
+            complaintColorCode.setBackgroundColor(colors[s-1]);
         }
 
 
