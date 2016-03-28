@@ -3,6 +3,7 @@
     <string name="title_activity_sign_up">SignUpActivity</string>
     <string name="title_activity_main">MainActivity</string>
     <string name="title_activity_post_complaint">PostComplaint</string>
+    <string name="spinner_title">Select Deaprtment</string>
 
 
     <!-- TODO: Remove or change this placeholder text -->
