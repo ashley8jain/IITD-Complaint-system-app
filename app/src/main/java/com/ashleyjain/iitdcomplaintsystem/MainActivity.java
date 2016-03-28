@@ -5,14 +5,12 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
-import android.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.mikepenz.materialdrawer.AccountHeader;
@@ -22,7 +20,6 @@ import com.mikepenz.materialdrawer.DrawerBuilder;
 import com.mikepenz.materialdrawer.model.PrimaryDrawerItem;
 import com.mikepenz.materialdrawer.model.ProfileDrawerItem;
 import com.mikepenz.materialdrawer.model.ProfileSettingDrawerItem;
-import com.mikepenz.materialdrawer.model.SectionDrawerItem;
 import com.mikepenz.materialdrawer.model.interfaces.IDrawerItem;
 import com.mikepenz.materialdrawer.model.interfaces.IProfile;
 
@@ -31,6 +28,8 @@ public class MainActivity extends AppCompatActivity {
     AccountHeader headerResult= null;
     Context context = MainActivity.this;
     String notJSON;
+    String fullname,username;
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -85,8 +84,8 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.my_toolbar);
         setSupportActionBar(toolbar);
         Intent intent = getIntent();
-        System.out.println(intent.getStringExtra("name"));
-
+        fullname = intent.getStringExtra("name");
+        username = intent.getStringExtra("username");
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -102,13 +101,13 @@ public class MainActivity extends AppCompatActivity {
         fragment.setArguments(bundle);
         getFragmentManager().beginTransaction()
                 .add(R.id.fragment_container, fragment)
-                        //.addToBackStack("toMainFragment")
+                .addToBackStack(fragment.toString())
                 .commit();
 
         headerResult = new AccountHeaderBuilder()
                 .withActivity(this)
                 .addProfiles(
-                        new ProfileDrawerItem().withName("ashley").withEmail("123@gmail.com"),
+                        new ProfileDrawerItem().withName(fullname).withEmail(username),
                         new ProfileSettingDrawerItem()
                                 .withName("Log Out")
                                 .withIdentifier(1)
@@ -134,20 +133,10 @@ public class MainActivity extends AppCompatActivity {
 
                         if (profile != null && profile instanceof IDrawerItem) {
                             switch ((int) profile.getIdentifier()) {
-//                                case 1:
-//                                    Toast.makeText(getApplicationContext(), "Log Out", Toast.LENGTH_LONG).show();
-//                                    final ProgressDialog dialog2 = ProgressDialog.show(context, "", "Loading.Please wait...", true);
-//
-//                                    String url = "http://"+ ((myApplication) getApplication()).getLocalHost() +"/default/logout.json";
-//                                    GETrequest.response(new GETrequest.VolleyCallback() {
-//                                        @Override
-//                                        public void onSuccess(String result) {
-//                                            dialog2.dismiss();
-//                                            System.out.println(result);
-//                                            finish();
-//                                        }
-//                                    }, context, url, dialog2);
-//                                    break;
+                                case 1:
+                                    Toast.makeText(getApplicationContext(), "Log Out Successful", Toast.LENGTH_LONG).show();
+                                    finish();
+                                    break;
                                 default:
                                     break;
                             }

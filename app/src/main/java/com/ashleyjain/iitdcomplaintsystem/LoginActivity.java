@@ -110,9 +110,10 @@ public class LoginActivity extends AppCompatActivity {
                                     final JSONObject user = jsonObject.getJSONObject("user");
                                     final String fname = user.getString("first_name");
                                     final String lname = user.getString("last_name");
+                                    final String username2 = user.getString("username");
                                     final Intent main2frag_intent = new Intent(context, MainActivity.class);
                                     main2frag_intent.putExtra("name", fname + " " + lname);
-                                    main2frag_intent.putExtra("username", username);
+                                    main2frag_intent.putExtra("username", username2);
                                     startActivity(main2frag_intent);
                                 }
                             } catch (JSONException e) {

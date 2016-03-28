@@ -1,12 +1,10 @@
 package com.ashleyjain.iitdcomplaintsystem;
 
-import android.app.Activity;
+import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.Context;
-import android.net.Uri;
 import android.os.Bundle;
-import android.app.Fragment;
 import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,7 +13,6 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -24,11 +21,10 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class NotificationFragment extends Fragment implements AdapterView.OnItemClickListener{
+public class NotificationFragment extends Fragment {
     Boolean IsNotif = true;
     private JSONArray notifsJSON;
     private ListView listView;
-    Context context;
     ArrayList<String> stringList = new ArrayList<String>();
     @Override
     public void onCreate(Bundle onSavedInstanceState){
@@ -54,10 +50,13 @@ public class NotificationFragment extends Fragment implements AdapterView.OnItem
 
         if(IsNotif) {
             TextView tv = (TextView) view.findViewById(R.id.isNotif);
+            Integer is_seen;
             for (int i = 0; i < notifsJSON.length(); i++) {
                 try {
                     JSONObject notif = notifsJSON.getJSONObject(i);
-                    stringList.add(new String(notif.getString("description")));
+                    is_seen=notif.getInt("is_seen");
+                    if(is_seen==0)
+                        stringList.add(new String(notif.getString("description")));
                 }
                 catch (JSONException e) {
                     e.printStackTrace();
@@ -66,6 +65,23 @@ public class NotificationFragment extends Fragment implements AdapterView.OnItem
             tv.setText(String.format("You have %d notifications", stringList.size()));
             customAdapter adapter = new customAdapter(inflater.getContext(), stringList);
             listView.setAdapter(adapter);
+            listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                    System.out.println(position);
+                    Scanner in = new Scanner(stringList.get(position)).useDelimiter("[^0-9]+");
+                    int integer = in.nextInt();
+                    FragmentManager fragmentManager = getActivity().getFragmentManager();
+                    FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                    Specific_complaint fragment = new Specific_complaint();
+                    Bundle bundle = new Bundle();
+                    bundle.putInt("id", integer);
+                    fragment.setArguments(bundle);
+                    fragmentTransaction.addToBackStack(fragment.toString());
+                    fragmentTransaction.replace(R.id.fragment_container, fragment);
+                    fragmentTransaction.commit();
+                }
+            });
         }
         else{
             TextView tv = (TextView) view.findViewById(R.id.isNotif);
@@ -75,11 +91,12 @@ public class NotificationFragment extends Fragment implements AdapterView.OnItem
         return view;
     }
 
-    @Override
-    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+//    @Override
+//    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 //        Scanner in = new Scanner(stringList.get(position)).useDelimiter("[^0-9]+");
 //        int integer = in.nextInt();
-//        Toast.makeText(context,"hello",Toast.LENGTH_LONG).show();
+//        Toast.makeText(context, "hello", Toast.LENGTH_LONG).show();
 //        FragmentManager fragmentManager = ((Activity) context).getFragmentManager();
 //        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
 //        Specific_complaint fragment = new Specific_complaint();
@@ -89,8 +106,8 @@ public class NotificationFragment extends Fragment implements AdapterView.OnItem
 //        fragmentTransaction.addToBackStack(fragment.toString());
 //        fragmentTransaction.replace(R.id.fragment_container, fragment);
 //        fragmentTransaction.commit();
-
-    }
+//
+//    }
 
     private class customAdapter extends ArrayAdapter<String>   {
         private View v;
@@ -141,5 +158,6 @@ public class NotificationFragment extends Fragment implements AdapterView.OnItem
 
 
     }
+
 
 }
