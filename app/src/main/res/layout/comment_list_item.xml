@@ -1,21 +1,85 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="horizontal" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:padding="5dp"
+    android:orientation="horizontal"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="#ffffff">
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textSize="30sp"
-        android:textColor="#5432FF"
-        android:id="@+id/comment"
-        android:layout_weight="3"/>
+    <LinearLayout
+        android:orientation="vertical"
+        android:id="@+id/commentColorCode"
+        android:layout_width="10dp"
+        android:layout_height="80dp"
+        android:background="@color/colorAccent">
+    </LinearLayout>
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Delete"
-        android:id="@+id/delete"
-        android:layout_weight="1"/>
+    <LinearLayout
+        android:layout_width="270dp"
+        android:layout_height="80dp"
+        android:orientation="vertical">
+        <TextView
+            android:padding="5dp"
+            android:paddingLeft="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:textStyle="bold"
+            android:textSize="16sp"
+            android:textColor="#0F0F0F"
+            android:background="#ffffff"
+            android:id="@+id/comment_by"
+            android:text="name and time" />
+        <TextView
+            android:padding="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:textSize="18sp"
+            android:textColor="#0F0F0F"
+            android:background="#ffffff"
+            android:id="@+id/comment"
+            android:text="custom list view" />
+
+    </LinearLayout>
+
+
+
+
+    <LinearLayout
+        android:background="#ffffff"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="60dp"
+            android:layout_height="30dp">
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="40dp"
+                android:layout_height="30dp">
+            </LinearLayout>
+            <ImageButton
+                android:src="@drawable/rsz_ic_close1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@null"
+                android:id="@+id/delete"
+                android:layout_weight="1"/>
+        </LinearLayout>
+
+        <TextView
+            android:padding="10dp"
+            android:layout_width="80dp"
+            android:layout_height="50dp"
+            android:textStyle="italic"
+            android:textSize="10sp"
+            android:textColor="#0F0F0F"
+            android:background="#ffffff"
+            android:id="@+id/comment_created_at"
+            android:text="time" />
+    </LinearLayout>
+
 
 </LinearLayout>

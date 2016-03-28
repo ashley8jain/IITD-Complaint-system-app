@@ -2,6 +2,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:padding="5dp"
+    android:paddingTop="20dp"
+    android:background="#ffffff"
     tools:context="com.ashleyjain.iitdcomplaintsystem.Complaint_list">
 
     <ListView

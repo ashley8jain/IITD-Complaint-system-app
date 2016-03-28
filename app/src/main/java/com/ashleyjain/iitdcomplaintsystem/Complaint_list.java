@@ -23,7 +23,8 @@ public class Complaint_list extends ListFragment {
 
     public String cCode;
     String[] complaintTitle,complaintDescription,compliantCreatedAt,compliantCreatedBy;
-    Integer[] complaintId;
+    Integer[] compliantDepartment;
+    int[] complaintId,complaintVotes;
     private List<complaintObject> complaintObjectList;
     complaintObjectAdapter adapter;
     @Override
@@ -41,18 +42,23 @@ public class Complaint_list extends ListFragment {
                     JSONObject jsonObject = new JSONObject(result);
                     JSONArray arr = jsonObject.getJSONArray("my_hostel_complaints");
                     System.out.println(arr);
-                    complaintTitle = new String[arr.length()];
-                    complaintDescription = new String[arr.length()];
-                    compliantCreatedAt = new String[arr.length()];
-                    compliantCreatedBy = new String[arr.length()];
-                    complaintId = new Integer[arr.length()];
-                    for (int i = 0; i < arr.length(); i++) {
+                    Integer len =  arr.length();
+                    complaintTitle = new String[len];
+                    complaintDescription = new String[len];
+                    compliantCreatedAt = new String[len];
+                    compliantCreatedBy = new String[len];
+                    complaintId = new int[len];
+                    complaintVotes = new int[len];
+                    compliantDepartment = new Integer[len];
+                    for (int i = 0; i < len; i++) {
                         JSONObject ass = arr.getJSONObject(i);
                         complaintTitle[i] = ass.getString("title");
                         complaintDescription[i] = ass.getString("description");
                         compliantCreatedAt[i] = ass.getString("created_at");
                         compliantCreatedBy[i] = ass.getString("user_id");
+                        complaintVotes[i] = ass.getInt("no_of_votes");
                         complaintId[i] = ass.getInt("id");
+                        compliantDepartment[i] = ass.getInt("department");
 
                     }
 
@@ -62,8 +68,8 @@ public class Complaint_list extends ListFragment {
                 complaintObjectList = new ArrayList<complaintObject>();
 
                 for (int i = 0; i < complaintTitle.length; i++) {
-
-                    complaintObject items = new complaintObject(complaintTitle[i],complaintDescription[i],compliantCreatedAt[i],compliantCreatedBy[i]);
+                    String v = Integer.toString(complaintVotes[i]);
+                    complaintObject items = new complaintObject(complaintTitle[i],complaintDescription[i],v,compliantCreatedAt[i],compliantDepartment[i]);
                     complaintObjectList.add(items);
 
                 }

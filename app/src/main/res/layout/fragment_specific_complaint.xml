@@ -2,89 +2,107 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:background="#ffffff"
     android:orientation="vertical">
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="vertical">
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="horizontal">
-        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
 
-            <ImageButton
-                android:layout_width="80dp"
-                android:layout_height="80dp"
-                android:id="@+id/upvote"/>
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="0"
-                android:id="@+id/no_of_votes"
-                android:textSize="20sp"
-                android:layout_gravity="center_horizontal"/>
-            <ImageButton
-                android:layout_width="80dp"
-                android:layout_height="80dp"
-                android:id="@+id/downvote"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <LinearLayout
+                android:layout_width="50dp"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+                <ImageButton
+                    android:src="@drawable/ic_up"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:id="@+id/upvote"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="0"
+                    android:id="@+id/no_of_votes"
+                    android:textSize="20sp"
+                    android:layout_gravity="center_horizontal"/>
+                <ImageButton
+                    android:src="@drawable/ic_down"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:id="@+id/downvote"/>
+            </LinearLayout>
+
+
+            <ScrollView
+                android:layout_width="330dp"
+                android:layout_height="match_parent">
+
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="20dp"
+                        android:text="title goes here. Sometimes java puzzles me.I have a huge amount of int initializations to make."
+                        android:id="@+id/title"
+                        android:textSize="20sp"
+                        android:textColor="@color/colorPrimary"/>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="10dp"
+                        android:id="@+id/description"
+                        android:text="Excellent playing VIRAT steered INDIA single handedly into semis"
+                        android:textColor="#000000"/>
+                </LinearLayout>
+
+            </ScrollView>
+
         </LinearLayout>
 
-        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-            android:layout_width="wrap_content"
+
+        <!--Comments from here-->
+        <LinearLayout
+            android:padding="5dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:layout_gravity="center_horizontal"
             android:layout_weight="1">
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:id="@+id/title"
-                android:textSize="50sp"
-                android:textColor="#125400"/>
+            <EditText
+                android:layout_width="240dp"
+                android:layout_height="wrap_content"
+                android:hint="comment"
+                android:lines="2"
+                android:id="@+id/comment"
+                android:layout_weight="3"/>
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Comment"
+                android:id="@+id/comment_button"
+                android:layout_weight="1"/>
         </LinearLayout>
-    </LinearLayout>
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:layout_weight="1">
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:id="@+id/description"
-            android:textColor="#125400"/>
-    </LinearLayout>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="horizontal"
-        android:layout_weight="1">
-        <EditText
-            android:layout_width="250dp"
+
+        <LinearLayout
+            android:layout_marginTop="5dp"
+            android:layout_width="380dp"
             android:layout_height="wrap_content"
-            android:hint="comment"
-            android:id="@+id/comment"
-            android:layout_weight="3"/>
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Comment"
-            android:id="@+id/comment_button"
-            android:layout_weight="1"/>
+            android:orientation="vertical">
+            <ListView
+                android:layout_marginLeft="2dp"
+                android:layout_marginRight="2dp"
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:id="@android:id/list">
+            </ListView>
+        </LinearLayout>
+
     </LinearLayout>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
-        <ListView
-            android:layout_height="match_parent"
-            android:layout_width="match_parent"
-            android:id="@android:id/list">
-        </ListView>
-    </LinearLayout>
-</LinearLayout>
 </ScrollView>

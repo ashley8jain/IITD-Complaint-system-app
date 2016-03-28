@@ -72,7 +72,7 @@ public class Specific_complaint extends ListFragment {
                         JSONObject com = comments.getJSONObject(i);
                         commentDescription[i] = com.getString("description");
                         commentCreatedAt[i] = com.getString("created_at");
-                        commentCreatedBy[i] = com.getString("user_id");
+                        commentCreatedBy[i] = com.getString("user_name");
                         commentId[i] = com.getInt("id");
 
                     }
@@ -144,8 +144,7 @@ public class Specific_complaint extends ListFragment {
                 commentObjectList = new ArrayList<commentObject>();
 
                 for (int i = 0; i < commentDescription.length; i++) {
-
-                    commentObject items = new commentObject(commentDescription[i], commentCreatedBy[i], commentCreatedBy[i], commentId[i]);
+                    commentObject items = new commentObject(commentDescription[i],commentCreatedBy[i],commentCreatedAt[i],commentId[i]);
                     commentObjectList.add(items);
 
                 }
@@ -188,7 +187,7 @@ public class Specific_complaint extends ListFragment {
                             String success = jsonObject.getString("success");
                             if (success == "false") {
                                 //user inputs are wrong
-                                Toast.makeText(getActivity(), "Could not commented!!", Toast.LENGTH_LONG).show();
+                                Toast.makeText(getActivity(), "Could not comment!!", Toast.LENGTH_LONG).show();
                             } else {
                                 Toast.makeText(getActivity(), "Commented!!", Toast.LENGTH_LONG).show();
                                 Specific_complaint fragment = new Specific_complaint();
@@ -204,7 +203,6 @@ public class Specific_complaint extends ListFragment {
                 }, getActivity(), url, dialog);
             }
         });
-
 
 //        Button delete = (Button) getActivity().findViewById(R.id.comment_button);
 //        delete.setOnClickListener(new View.OnClickListener() {
@@ -243,7 +241,6 @@ public class Specific_complaint extends ListFragment {
 //                }, getActivity(), url, dialog);
 //            }
 //        });
-
 
     }
 
