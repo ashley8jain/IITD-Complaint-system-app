@@ -142,43 +142,43 @@ public class Specific_complaint extends ListFragment {
         });
 
 
-        Button delete = (Button) getActivity().findViewById(R.id.comment_button);
-        delete.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                EditText comment = (EditText) getActivity().findViewById(R.id.comment);
-                com = comment.getText().toString();
-                com = com.replace(' ', '+');
-                Toast.makeText(getActivity(), com, Toast.LENGTH_LONG).show();
-                final ProgressDialog dialog = ProgressDialog.show(getActivity(), "", "Authenticating...", true);
-                String url = "http://"+LoginActivity.ip+"/first/default/post_comment.json?complaint_id=" + cId + "&description=" + com;
-
-                //GET request through stringrequest
-                GETrequest.response(new GETrequest.VolleyCallback() {
-                    @Override
-                    public void onSuccess(String result) {
-                        try {
-
-                            JSONObject jsonObject = new JSONObject(result);
-                            String success = jsonObject.getString("success");
-                            if (success == "false") {
-                                //user inputs are wrong
-                                Toast.makeText(getActivity(), "Could not commented!!", Toast.LENGTH_LONG).show();
-                            } else {
-                                Toast.makeText(getActivity(), "Commented!!", Toast.LENGTH_LONG).show();
-                                Specific_complaint fragment = new Specific_complaint();
-                                Bundle bundle = new Bundle();
-                                bundle.putInt("id" , cId);
-                                fragment.setArguments(bundle);
-                                replaceFragment(fragment);
-                            }
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
-                    }
-                }, getActivity(), url, dialog);
-            }
-        });
+//        Button delete = (Button) getActivity().findViewById(R.id.comment_button);
+//        delete.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                EditText comment = (EditText) getActivity().findViewById(R.id.comment);
+//                com = comment.getText().toString();
+//                com = com.replace(' ', '+');
+//                Toast.makeText(getActivity(), com, Toast.LENGTH_LONG).show();
+//                final ProgressDialog dialog = ProgressDialog.show(getActivity(), "", "Authenticating...", true);
+//                String url = "http://"+LoginActivity.ip+"/first/default/post_comment.json?complaint_id=" + cId + "&description=" + com;
+//
+//                //GET request through stringrequest
+//                GETrequest.response(new GETrequest.VolleyCallback() {
+//                    @Override
+//                    public void onSuccess(String result) {
+//                        try {
+//
+//                            JSONObject jsonObject = new JSONObject(result);
+//                            String success = jsonObject.getString("success");
+//                            if (success == "false") {
+//                                //user inputs are wrong
+//                                Toast.makeText(getActivity(), "Could not commented!!", Toast.LENGTH_LONG).show();
+//                            } else {
+//                                Toast.makeText(getActivity(), "Commented!!", Toast.LENGTH_LONG).show();
+//                                Specific_complaint fragment = new Specific_complaint();
+//                                Bundle bundle = new Bundle();
+//                                bundle.putInt("id" , cId);
+//                                fragment.setArguments(bundle);
+//                                replaceFragment(fragment);
+//                            }
+//                        } catch (JSONException e) {
+//                            e.printStackTrace();
+//                        }
+//                    }
+//                }, getActivity(), url, dialog);
+//            }
+//        });
 
 
     }

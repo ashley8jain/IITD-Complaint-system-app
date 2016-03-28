@@ -1,0 +1,22 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.ashleyjain.moodleapp.NotificationFragment">
+    <TextView
+        android:id="@+id/isNotif"
+        android:textAlignment="center"
+        android:textSize="15sp"
+        android:textStyle="italic"
+        android:padding="5dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+    <!-- TODO: Update blank fragment layout -->
+    <ListView
+        android:id="@+id/notif_listView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+    </ListView>
+
+</LinearLayout>

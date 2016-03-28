@@ -10,6 +10,7 @@ import android.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -24,7 +25,7 @@ import java.util.List;
 /**
  * Created by chandudasari on 27/03/16.
  */
-public class commentObjectAdapter extends BaseAdapter {
+public class commentObjectAdapter extends BaseAdapter  {
     Context context;
     List<commentObject> commentList;
     Integer cId;
@@ -115,6 +116,8 @@ public class commentObjectAdapter extends BaseAdapter {
 
         return convertView;
     }
+
+
 
 //    public void replaceFragment(Fragment courseFrag){
 //        FragmentTransaction fragmentTransaction = ((Activity) context).getFragmentManager().beginTransaction();

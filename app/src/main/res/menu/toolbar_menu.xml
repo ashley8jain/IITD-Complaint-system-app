@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/material_drawer_switch"
+        android:layout_gravity = "left"
+        android:icon="@drawable/ic_menu_white_24dp"
+        android:title="@string/material_drawer_open"
+        app:showAsAction="always"
+        />
+
+    <!--notification toolbar button-->
+    <item android:id="@+id/notification"
+        android:icon ="@drawable/notification"
+        android:title="Notifications"
+        app:showAsAction="always"
+        />
+</menu>
