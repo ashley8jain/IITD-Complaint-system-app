@@ -82,7 +82,7 @@ public class commentObjectAdapter extends BaseAdapter  {
                                 //user inputs are wrong
                                 Toast.makeText(context, "Could not Delete!!", Toast.LENGTH_LONG).show();
                             } else {
-                                Toast.makeText(context, "Deleted!!", Toast.LENGTH_LONG).show();
+                                Toast.makeText(context, "!!", Toast.LENGTH_LONG).show();
 
                                 //try to use Fragment instead of support fragment
                                 FragmentManager fragmentManager = ((Activity) context).getFragmentManager();
@@ -92,7 +92,7 @@ public class commentObjectAdapter extends BaseAdapter  {
                                 bundle.putInt("id", cId);
                                 fragment.setArguments(bundle);
                                 fragmentTransaction.addToBackStack(fragment.toString());
-                                fragmentTransaction.replace(R.id.fragment_container, fragment);
+                                fragmentTransaction.replace(R.id.pager, fragment);
                                 fragmentTransaction.commit();
 //                                Specific_complaint fragment = new Specific_complaint();
 //                                Bundle bundle = new Bundle();
