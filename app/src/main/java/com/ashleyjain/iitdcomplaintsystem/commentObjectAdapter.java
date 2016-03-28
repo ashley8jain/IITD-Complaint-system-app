@@ -13,6 +13,8 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -62,7 +64,7 @@ public class commentObjectAdapter extends BaseAdapter {
         }
 
 
-        Button deleteImageView = (Button) convertView.findViewById(R.id.delete);
+        ImageButton deleteImageView = (ImageButton) convertView.findViewById(R.id.delete);
         deleteImageView.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 final ProgressDialog dialog = ProgressDialog.show(context, "", "Authenticating...", true);
@@ -108,9 +110,14 @@ public class commentObjectAdapter extends BaseAdapter {
         });
 
         TextView commentDescription = (TextView) convertView.findViewById(R.id.comment);
+        TextView commentBy = (TextView) convertView.findViewById(R.id.comment_by);
+        TextView commentAt = (TextView) convertView.findViewById(R.id.comment_created_at);
+        LinearLayout linearLayout = (LinearLayout) convertView.findViewById(R.id.commentColorCode);
 
-            commentObject assign_row = commentList.get(position);
-            commentDescription.setText(assign_row.getDescription());
+        commentObject assign_row = commentList.get(position);
+        commentDescription.setText(assign_row.getDescription());
+        commentBy.setText(assign_row.getCreated_by());
+        commentAt.setText(assign_row.getCreated_at());
 
 
         return convertView;
