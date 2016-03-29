@@ -199,8 +199,8 @@ public class Specific_complaint extends ListFragment {
     public void onViewCreated(View v, Bundle savedInstanceState){
         super.onViewCreated(v, savedInstanceState);
 
-        Button button = (Button) getActivity().findViewById(R.id.comment_button);
-        button.setOnClickListener(new View.OnClickListener() {
+        Button postComment = (Button) getActivity().findViewById(R.id.comment_button);
+        postComment.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 EditText comment = (EditText) getActivity().findViewById(R.id.comment);
@@ -240,7 +240,7 @@ public class Specific_complaint extends ListFragment {
 
     public void replaceFragment(Fragment courseFrag){
         FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
-        fragmentTransaction.replace(R.id.pager, courseFrag, courseFrag.toString());
+        fragmentTransaction.replace(R.id.fragment_container, courseFrag, courseFrag.toString());
         fragmentTransaction.addToBackStack(courseFrag.toString());
         fragmentTransaction.commit();
     }
