@@ -155,6 +155,9 @@ public class MainActivity extends AppCompatActivity  {
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.my_toolbar);
         setSupportActionBar(toolbar);
+        getSupportActionBar().setTitle("Complaints List");
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
         fm = getSupportFragmentManager();
         Intent intent = getIntent();
         fullname = intent.getStringExtra("name");

@@ -11,7 +11,7 @@
 
     <!--notification toolbar button-->
     <item android:id="@+id/notification"
-        android:icon ="@drawable/notification"
+        android:icon ="@drawable/ic_notifications"
         android:title="Notifications"
         app:showAsAction="always"
         />
