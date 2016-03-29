@@ -41,7 +41,7 @@ public class MainActivity extends AppCompatActivity  {
     AccountHeader headerResult= null;
     Context context = MainActivity.this;
     String notJSON;
-    String fullname,username;
+    String fullname,username,current_user_id;
     public static Integer filter = 0;
 
     boolean doubleBackToExitPressedOnce = false;
@@ -151,6 +151,7 @@ public class MainActivity extends AppCompatActivity  {
         Intent intent = getIntent();
         fullname = intent.getStringExtra("name");
         username = intent.getStringExtra("username");
+        current_user_id = intent.getStringExtra("current_user_id");
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
