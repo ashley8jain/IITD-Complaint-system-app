@@ -86,7 +86,10 @@ public class HostelComplaintList extends ListFragment {
     public void onListItemClick(ListView l, View v, int position, long id) {
         super.onListItemClick(l, v, position, id);
         Intent myIntent = new Intent(getContext(), SpecificComplaint.class);
-        myIntent.putExtra("id",complaintId[position]);
+        myIntent.putExtra("id", complaintId[position]);
+        MainActivity mainActivity = (MainActivity) getActivity();
+        iitcomplaint_app app = (iitcomplaint_app) mainActivity.getApplication();
+        myIntent.putExtra("current_user_id",app.getLocalHost());
         startActivity(myIntent);
 
     }

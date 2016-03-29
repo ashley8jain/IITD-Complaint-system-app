@@ -29,13 +29,13 @@ public class Specific_complaint extends ListFragment {
     public  Integer cId;
     TextView Title,Description,n_o_v;
     commentObjectAdapter adapter;
-    ImageButton upvote,downvote;
 
+    ImageButton upvote,downvote,editButton;
     public Specific_complaint() {
         // Required empty public constructor
     }
 
-    String title,description,created_at,created_by,com;
+    String title,description,created_at,created_by,com,complaint_id;
     String[] commentDescription,commentCreatedAt,commentCreatedBy;
     Integer[] commentId;
     Integer no_of_vote;
@@ -63,16 +63,24 @@ public class Specific_complaint extends ListFragment {
                     no_of_vote = complaintObj.getInt("no_of_votes");
                     created_at = complaintObj.getString("created_at");
                     created_by = complaintObj.getString("user_id");
+                    complaint_id = complaintObj.getString("id");
                     Title = (TextView) getActivity().findViewById(R.id.title);
                     Description = (TextView) getActivity().findViewById(R.id.description);
                     n_o_v = (TextView) getActivity().findViewById(R.id.no_of_votes);
                     upvote = (ImageButton) getActivity().findViewById(R.id.upvote);
                     downvote = (ImageButton) getActivity().findViewById(R.id.downvote);
+                    editButton = (ImageButton) getActivity().findViewById(R.id.edit_button_cond);
 
                     Title.setText(title);
                     Description.setText(description);
 
                     //getting comments response json
+                    final iitcomplaint_app app = (iitcomplaint_app) getActivity().getApplicationContext();
+
+                    if(created_by.equals(app.getLocalHost())){
+                        editButton.setVisibility(View.VISIBLE);
+                    }
+
                     JSONArray comments = jsonObject.getJSONArray("comments");
                     commentDescription = new String[comments.length()];
                     commentCreatedAt = new String[comments.length()];
@@ -154,6 +162,23 @@ public class Specific_complaint extends ListFragment {
                         }
                     });
 
+                    //edit onClickListener
+                    editButton.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            Fragment fragment = (Fragment)( new Edit_Complaint());
+                            FragmentTransaction ft = getFragmentManager().beginTransaction();
+                            Bundle bundle = new Bundle();
+                            bundle.putString("title",title );
+                            bundle.putString("description",description );
+                            bundle.putString("cId",complaint_id);
+                            fragment.setArguments(bundle);
+                            ft.addToBackStack(ft.toString());
+                            ft.replace(R.id.fragment_container ,fragment);
+                            ft.commit();
+                        }
+                    });
+
 
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -185,8 +210,8 @@ public class Specific_complaint extends ListFragment {
     public void onViewCreated(View v, Bundle savedInstanceState){
         super.onViewCreated(v, savedInstanceState);
 
-        Button button = (Button) getActivity().findViewById(R.id.comment_button);
-        button.setOnClickListener(new View.OnClickListener() {
+        Button postComment = (Button) getActivity().findViewById(R.id.comment_button);
+        postComment.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 EditText comment = (EditText) getActivity().findViewById(R.id.comment);

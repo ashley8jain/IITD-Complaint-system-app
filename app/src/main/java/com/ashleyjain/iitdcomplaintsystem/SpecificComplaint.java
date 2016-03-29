@@ -14,6 +14,7 @@ import android.view.View;
 public class SpecificComplaint extends AppCompatActivity {
 
     String notJSON;
+    String fullname,username,current_user_id;
     Integer cId;
 
     @Override
@@ -23,6 +24,7 @@ public class SpecificComplaint extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         cId = getIntent().getIntExtra("id",1);
+        current_user_id = getIntent().getStringExtra("current_user_id");
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override

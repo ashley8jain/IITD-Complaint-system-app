@@ -11,7 +11,7 @@
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="com.ashleyjain.iitdcomplaintsystem.PostComplaint"
     tools:showIn="@layout/activity_post_complaint"
-    android:background="#d05050">
+    android:background="@color/colorPrimaryLight">
 
     <EditText
         android:layout_width="match_parent"
@@ -41,7 +41,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Submit"
-        android:textColor="#d05050"
+        android:textColor="#283018"
         android:textSize="30sp"
         android:id="@+id/submit"
         android:background="@drawable/buttonshape"
