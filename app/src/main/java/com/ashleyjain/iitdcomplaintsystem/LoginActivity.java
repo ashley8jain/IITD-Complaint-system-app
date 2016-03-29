@@ -121,13 +121,22 @@ public class LoginActivity extends AppCompatActivity {
                                     final String lname = user.getString("last_name");
                                     final String username2 = user.getString("username");
                                     final String user_id = user.getString("id");
+                                    final String user_type=user.getString("type_");
+                                    if(user_type.equals(2)){
+                                    final String department = user.getString("department");
+                                        final String hostel_name = user.getString("hostel_name");
+                                    }
+                                    if(user_type.equals(3)){
+                                        final String department = user.getString("department");
+                                    }
                                     final iitcomplaint_app app = (iitcomplaint_app) getApplicationContext();
                                     app.setLocalHost(user_id);
-                                    System.out.println("==================="+app.getLocalHost()+"===================================");
+                                    System.out.println("===================" + app.getLocalHost() + "===================================");
                                     final Intent main2frag_intent = new Intent(context, MainActivity.class);
                                     main2frag_intent.putExtra("name", fname + " " + lname);
                                     main2frag_intent.putExtra("username", username2);
                                     main2frag_intent.putExtra("current_user_id", user_id);
+                                    main2frag_intent.putExtra("type_",user_type);
                                     startActivity(main2frag_intent);
                                 }
                             } catch (JSONException e) {

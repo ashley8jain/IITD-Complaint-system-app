@@ -22,6 +22,7 @@ public class ViewpagerFragment extends Fragment {
         return rootView;
     }
 
+
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
@@ -32,13 +33,12 @@ public class ViewpagerFragment extends Fragment {
         tabLayout.addTab(tabLayout.newTab().setText("Hostel"));
         tabLayout.addTab(tabLayout.newTab().setText("Institute"));
 
-
-
         final ViewPager viewPager = (ViewPager) getActivity().findViewById(R.id.pager);
         final PagerAdapter adapter = new PagerAdapter(getChildFragmentManager(), tabLayout.getTabCount());
         viewPager.setAdapter(adapter);
         viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
 
+        viewPager.setCurrentItem(MainActivity.tab);
 
         tabLayout.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
@@ -57,6 +57,8 @@ public class ViewpagerFragment extends Fragment {
                 viewPager.setCurrentItem(tab.getPosition());
             }
         });
+
+
 
     }
 
