@@ -42,6 +42,7 @@ public class Specific_complaint extends ListFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         cId = getArguments().getInt("id");
+
         String url = "http://"+LoginActivity.ip+"/first/default/spec_complaint.json/"+cId;
         final ProgressDialog dialog = ProgressDialog.show(getActivity(),"", "Loading.Please wait...", true);
         GETrequest.response(new GETrequest.VolleyCallback() {
@@ -61,8 +62,10 @@ public class Specific_complaint extends ListFragment {
                     n_o_v = (TextView) getActivity().findViewById(R.id.no_of_votes);
                     upvote = (ImageButton) getActivity().findViewById(R.id.upvote);
                     downvote = (ImageButton) getActivity().findViewById(R.id.downvote);
+
                     Title.setText(title);
                     Description.setText(description);
+
                     JSONArray comments = jsonObject.getJSONArray("comments");
                     commentDescription = new String[comments.length()];
                     commentCreatedAt = new String[comments.length()];

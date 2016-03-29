@@ -1,17 +1,13 @@
 package com.ashleyjain.iitdcomplaintsystem;
 
 import android.app.ProgressDialog;
-import android.content.Context;
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.support.v4.app.ListFragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -34,7 +30,7 @@ public class InstituteComplaintList extends ListFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        String url = "http://"+LoginActivity.ip+"/first/default/home.json?level="+2+"&display_dept="+filter;
+        String url = "http://"+LoginActivity.ip+"/first/default/home.json?level="+3+"&display_dept="+filter;
         final ProgressDialog dialog = ProgressDialog.show(getActivity(),"", "Loading.Please wait...", true);
         GETrequest.response(new GETrequest.VolleyCallback() {
             @Override
@@ -91,7 +87,7 @@ public class InstituteComplaintList extends ListFragment {
         Intent myIntent = new Intent(getContext(), SpecificComplaint.class);
         startActivity(myIntent);
         bundle.putInt("id", complaintId[position]);
-        Toast.makeText(getContext(),Integer.toString(complaintId[position]),Toast.LENGTH_SHORT).show();
+      //  Toast.makeText(getContext(),Integer.toString(complaintId[position]),Toast.LENGTH_SHORT).show();
         super.onListItemClick(l, v, position, id);
     }
     @Override

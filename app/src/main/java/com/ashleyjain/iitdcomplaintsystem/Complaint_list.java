@@ -87,8 +87,6 @@ public class Complaint_list extends ListFragment {
          Bundle bundle = new Bundle();
          Specific_complaint fragment = new Specific_complaint();
          bundle.putInt("id" , complaintId[position]);
-//        bundle.putString("deadline" , assignDeadline[position]);
-//        bundle.putString("description" , assignDescr[position]);
         fragment.setArguments(bundle);
         replaceFragment(fragment);
 

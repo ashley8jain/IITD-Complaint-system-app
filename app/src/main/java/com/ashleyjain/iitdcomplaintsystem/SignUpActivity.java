@@ -1,6 +1,7 @@
 package com.ashleyjain.iitdcomplaintsystem;
 
 import android.content.Context;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -23,6 +24,9 @@ public class SignUpActivity extends AppCompatActivity {
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
+        Typeface font = Typeface.createFromAsset(getAssets(),"YuppySC-Regular.ttf");
+
+
         firstname = (EditText) findViewById(R.id.firstname);
         lastname = (EditText) findViewById(R.id.lastname);
         username = (EditText) findViewById(R.id.username);
@@ -32,6 +36,7 @@ public class SignUpActivity extends AppCompatActivity {
         password = (EditText) findViewById(R.id.password);
         confirmpassword = (EditText) findViewById(R.id.confirmpassword);
         signup = (Button) findViewById(R.id.sign_up);
+        firstname.setTypeface(font);lastname.setTypeface(font);username.setTypeface(font);hostelname.setTypeface(font);department.setTypeface(font);signup.setTypeface(font);
 
         firstname.addTextChangedListener(new checkError(firstname));
         lastname.addTextChangedListener(new checkError(lastname));

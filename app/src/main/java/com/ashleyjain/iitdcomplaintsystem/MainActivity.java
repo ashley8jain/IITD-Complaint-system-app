@@ -1,11 +1,15 @@
 package com.ashleyjain.iitdcomplaintsystem;
 
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.TabLayout;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -16,17 +20,16 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.CompoundButton;
 import android.widget.Toast;
+
 import com.mikepenz.materialdrawer.AccountHeader;
 import com.mikepenz.materialdrawer.AccountHeaderBuilder;
 import com.mikepenz.materialdrawer.Drawer;
 import com.mikepenz.materialdrawer.DrawerBuilder;
 import com.mikepenz.materialdrawer.interfaces.OnCheckedChangeListener;
-import com.mikepenz.materialdrawer.model.PrimaryDrawerItem;
 import com.mikepenz.materialdrawer.model.ProfileDrawerItem;
 import com.mikepenz.materialdrawer.model.ProfileSettingDrawerItem;
 import com.mikepenz.materialdrawer.model.SecondaryDrawerItem;
 import com.mikepenz.materialdrawer.model.SectionDrawerItem;
-
 import com.mikepenz.materialdrawer.model.interfaces.IDrawerItem;
 import com.mikepenz.materialdrawer.model.interfaces.IProfile;
 import com.mikepenz.materialdrawer.model.interfaces.Nameable;
@@ -40,6 +43,54 @@ public class MainActivity extends AppCompatActivity  {
     String fullname,username;
     public static Integer filter = 0;
 
+    boolean doubleBackToExitPressedOnce = false;
+    FragmentManager fm;
+
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        Intent i = new Intent(MainActivity.this, MainActivity.class);  //your class
+        startActivity(i);
+        finish();
+
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (doubleBackToExitPressedOnce) {
+
+            AlertDialog.Builder alertbuilder = new AlertDialog.Builder(context);
+            alertbuilder.setTitle("Do you mean to exit or logout?");
+            alertbuilder.setCancelable(true);
+            alertbuilder.setNegativeButton("LogOut",new DialogInterface.OnClickListener(){
+                public void onClick(DialogInterface dialog, int id) {
+                    finish();
+                }
+            });
+            alertbuilder.setPositiveButton("Exit", new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int id) {
+                    Intent startMain = new Intent(Intent.ACTION_MAIN);
+                    startMain.addCategory(Intent.CATEGORY_HOME);
+                    startMain.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    startActivity(startMain);
+                }
+            });
+            AlertDialog alertDialog = alertbuilder.create();
+            alertDialog.show();
+            return;
+        }
+        fm.popBackStack();
+        this.doubleBackToExitPressedOnce = true;
+        Toast.makeText(this, "Please click BACK again to exit", Toast.LENGTH_SHORT).show();
+
+        new Handler().postDelayed(new Runnable() {
+
+            @Override
+            public void run() {
+                doubleBackToExitPressedOnce=false;
+            }
+        }, 2000);
+    }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
@@ -92,6 +143,7 @@ public class MainActivity extends AppCompatActivity  {
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.my_toolbar);
         setSupportActionBar(toolbar);
+        fm = getSupportFragmentManager();
         Intent intent = getIntent();
         fullname = intent.getStringExtra("name");
         username = intent.getStringExtra("username");
@@ -132,7 +184,7 @@ public class MainActivity extends AppCompatActivity  {
 
             @Override
             public void onTabReselected(TabLayout.Tab tab) {
-
+                viewPager.setCurrentItem(tab.getPosition());
             }
         });
 
@@ -176,7 +228,6 @@ public class MainActivity extends AppCompatActivity  {
                         return false;
                     }
                 })
-
                 .build();
 
 
@@ -234,10 +285,12 @@ public class MainActivity extends AppCompatActivity  {
                              filter =5;
                              viewPager.invalidate();
                         }
-
-
+                        Intent i = new Intent(MainActivity.this, MainActivity.class);  //your class
+                        startActivity(i);
+                        finish();
                         break;
                 }
+
                 return false;
             }
         });

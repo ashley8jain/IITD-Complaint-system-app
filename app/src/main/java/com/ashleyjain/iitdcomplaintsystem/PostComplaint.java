@@ -2,6 +2,7 @@ package com.ashleyjain.iitdcomplaintsystem;
 
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -85,10 +86,19 @@ public class PostComplaint extends AppCompatActivity implements OnItemSelectedLi
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        Typeface font = Typeface.createFromAsset(getAssets(),"YuppySC-Regular.ttf");
+
 
         title = (EditText) findViewById(R.id.title1);
         description = (EditText) findViewById(R.id.description);
         submit = (Button) findViewById(R.id.submit);
+
+        title.addTextChangedListener(new checkError(title));
+        title.setTypeface(font);
+
+        description.addTextChangedListener(new checkError(description));
+        description.setTypeface(font);
+
 
         // Spinner element
         Spinner spinner = (Spinner) findViewById(R.id.spinner);
@@ -111,7 +121,7 @@ public class PostComplaint extends AppCompatActivity implements OnItemSelectedLi
 
         // attaching data adapter to spinner
         spinner.setAdapter(dataAdapter);
-
+        submit.setTypeface(font);
 
         submit.setOnClickListener(new View.OnClickListener() {
             @Override

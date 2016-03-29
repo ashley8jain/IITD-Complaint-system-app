@@ -1,17 +1,13 @@
 package com.ashleyjain.iitdcomplaintsystem;
 
 import android.app.ProgressDialog;
-import android.content.Context;
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.support.v4.app.ListFragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -92,7 +88,7 @@ public class HostelComplaintList extends ListFragment {
         Intent myIntent = new Intent(getContext(), SpecificComplaint.class);
         startActivity(myIntent);
         bundle.putInt("id", complaintId[position]);
-        Toast.makeText(getContext(),Integer.toString(complaintId[position]),Toast.LENGTH_SHORT).show();
+        //Toast.makeText(getContext(),Integer.toString(complaintId[position]),Toast.LENGTH_SHORT).show();
 
     }
     @Override

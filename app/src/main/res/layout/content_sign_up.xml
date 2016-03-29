@@ -11,7 +11,7 @@
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="com.ashleyjain.iitdcomplaintsystem.SignUpActivity"
     tools:showIn="@layout/activity_sign_up"
-    android:background="#994646">
+    android:background="#d05050">
 
     <TextView
         android:layout_width="wrap_content"
@@ -22,7 +22,8 @@
         android:textStyle="bold"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:textColor="#ffffff" />
+        android:textColor="#80ffffff"
+        android:typeface="serif" />
     <LinearLayout
         android:id="@+id/EditTextLayout"
         android:layout_width="match_parent"
@@ -89,11 +90,12 @@
         android:layout_height="wrap_content"
         android:text="SIGN UP"
         android:id="@+id/sign_up"
-        android:background="#b4ffffff"
+        android:background="#96ffffff"
         android:layout_below="@+id/EditTextLayout"
         android:layout_alignParentStart="true"
         android:layout_marginLeft="@dimen/activity_horizontal_margin"
         android:layout_marginRight="@dimen/activity_horizontal_margin"
-        android:textColor="#994646" />
+        android:textColor="#d15555"
+        android:textStyle="bold" />
 
 </RelativeLayout>

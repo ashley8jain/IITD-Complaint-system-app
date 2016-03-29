@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Typeface;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
@@ -32,7 +33,7 @@ public class LoginActivity extends AppCompatActivity {
     Button login;
     TextView signup;
 
-    public static final String ip = "10.192.38.186:8000";
+    public static final String ip = "192.168.56.1:8000";
     private static final String SET_COOKIE_KEY = "set-cookie";
     private static final String COOKIE_KEY = "cookie";
     private static final String SESSION_COOKIE = "session_id_first";
@@ -54,14 +55,20 @@ public class LoginActivity extends AppCompatActivity {
         _preferences = PreferenceManager.getDefaultSharedPreferences(this);  //for saving cookies
         _requestQueue = Volley.newRequestQueue(this);
 
+        Typeface font = Typeface.createFromAsset(getAssets(),"YuppySC-Regular.ttf");
+
         id = (EditText) findViewById(R.id.userid);
+        id.setTypeface(font);
         pass = (EditText) findViewById(R.id.password);
+
         final String[] username = new String[1];
         final String[] password = new String[1];
 
 
         login = (Button) findViewById(R.id.button);
+        login.setTypeface(font);
         signup = (TextView) findViewById(R.id.textView);
+        signup.setTypeface(font);
 
         signup.setOnClickListener(new View.OnClickListener() {
             @Override

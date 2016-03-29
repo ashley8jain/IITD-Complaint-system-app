@@ -1,20 +1,16 @@
 package com.ashleyjain.iitdcomplaintsystem;
 
-import android.app.FragmentManager;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.TextView;
-
-import java.util.List;
 
 public class SpecificComplaint extends AppCompatActivity {
 
@@ -85,7 +81,6 @@ public class SpecificComplaint extends AppCompatActivity {
         });
 
         Bundle bundle = new Bundle();
-//      bundle.putString("course_list", courselist_response);
         Specific_complaint fragment = new Specific_complaint();
         fragment.setArguments(bundle);
         getFragmentManager().beginTransaction()
