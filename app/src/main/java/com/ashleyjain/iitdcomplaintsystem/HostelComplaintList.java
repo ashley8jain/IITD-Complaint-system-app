@@ -83,12 +83,9 @@ public class HostelComplaintList extends ListFragment {
     @Override
     public void onListItemClick(ListView l, View v, int position, long id) {
         super.onListItemClick(l, v, position, id);
-        Bundle bundle = new Bundle();
-//        Specific_complaint fragment = new Specific_complaint();
         Intent myIntent = new Intent(getContext(), SpecificComplaint.class);
+        myIntent.putExtra("id",complaintId[position]);
         startActivity(myIntent);
-        bundle.putInt("id", complaintId[position]);
-        //Toast.makeText(getContext(),Integer.toString(complaintId[position]),Toast.LENGTH_SHORT).show();
 
     }
     @Override

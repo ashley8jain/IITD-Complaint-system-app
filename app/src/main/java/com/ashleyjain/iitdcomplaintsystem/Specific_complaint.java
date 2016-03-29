@@ -42,7 +42,6 @@ public class Specific_complaint extends ListFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         cId = getArguments().getInt("id");
-
         String url = "http://"+LoginActivity.ip+"/first/default/spec_complaint.json/"+cId;
         final ProgressDialog dialog = ProgressDialog.show(getActivity(),"", "Loading.Please wait...", true);
         GETrequest.response(new GETrequest.VolleyCallback() {

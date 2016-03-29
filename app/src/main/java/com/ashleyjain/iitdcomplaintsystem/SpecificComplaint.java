@@ -17,6 +17,7 @@ public class SpecificComplaint extends AppCompatActivity {
     Context context = SpecificComplaint.this;
     String notJSON;
     String fullname,username;
+    Integer cId;
 
 
     @Override
@@ -71,6 +72,7 @@ public class SpecificComplaint extends AppCompatActivity {
         setContentView(R.layout.activity_specific_complaint);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        cId = getIntent().getIntExtra("id",1);
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -81,6 +83,7 @@ public class SpecificComplaint extends AppCompatActivity {
         });
 
         Bundle bundle = new Bundle();
+        bundle.putInt("id",cId);
         Specific_complaint fragment = new Specific_complaint();
         fragment.setArguments(bundle);
         getFragmentManager().beginTransaction()
