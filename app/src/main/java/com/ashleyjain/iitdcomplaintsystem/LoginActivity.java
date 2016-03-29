@@ -33,7 +33,7 @@ public class LoginActivity extends AppCompatActivity {
     Button login;
     TextView signup;
 
-    public static final String ip = "192.168.56.1:8000";
+    public static final String ip = "10.192.40.180:8000";
     private static final String SET_COOKIE_KEY = "set-cookie";
     private static final String COOKIE_KEY = "cookie";
     private static final String SESSION_COOKIE = "session_id_first";
