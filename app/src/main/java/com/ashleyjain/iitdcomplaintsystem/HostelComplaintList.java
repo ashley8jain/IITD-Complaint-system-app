@@ -32,10 +32,11 @@ public class HostelComplaintList extends ListFragment {
 
         String url = "http://"+LoginActivity.ip+"/first/default/home.json?level="+2+"&display_dept="+filter;
         final ProgressDialog dialog = ProgressDialog.show(getActivity(),"", "Loading.Please wait...", true);
+
+        //GET request through stringrequest
         GETrequest.response(new GETrequest.VolleyCallback() {
             @Override
             public void onSuccess(final String result) {
-                //dialog.dismiss();
                 try {
                     JSONObject jsonObject = new JSONObject(result);
                     JSONArray arr = jsonObject.getJSONArray("my_hostel_complaints");
@@ -80,6 +81,7 @@ public class HostelComplaintList extends ListFragment {
         return inflater.inflate(R.layout.fragment_complaint_list, container, false);
     }
 
+    //selecting specific complaint
     @Override
     public void onListItemClick(ListView l, View v, int position, long id) {
         super.onListItemClick(l, v, position, id);
@@ -88,6 +90,7 @@ public class HostelComplaintList extends ListFragment {
         startActivity(myIntent);
 
     }
+
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);

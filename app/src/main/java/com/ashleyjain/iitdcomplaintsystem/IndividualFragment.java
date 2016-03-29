@@ -17,23 +17,25 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class IndividualFragment extends ListFragment {
-    public String cCode;
+
     String[] complaintTitle,complaintDescription,compliantCreatedAt,compliantCreatedBy;
     int[] complaintId, complaintVotes;
     Integer[] compliantDepartment;
     private List<complaintObject> complaintObjectList;
     complaintObjectAdapter adapter;
     Integer filter = MainActivity.filter;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
         String url = "http://"+LoginActivity.ip+"/first/default/home.json?level="+1+"&display_dept="+filter;
         final ProgressDialog dialog = ProgressDialog.show(getActivity(),"", "Loading.Please wait...", true);
+
+        //GET request through stringrequest
         GETrequest.response(new GETrequest.VolleyCallback() {
             @Override
             public void onSuccess(final String result) {
-                //dialog.dismiss();
                 try {
                     JSONObject jsonObject = new JSONObject(result);
                     JSONArray arr = jsonObject.getJSONArray("my_hostel_complaints");
@@ -77,6 +79,8 @@ public class IndividualFragment extends ListFragment {
         }, getActivity(), url, dialog);
         return inflater.inflate(R.layout.fragment_complaint_list, container, false);
     }
+
+    //selecting specific complaint
     @Override
     public void onListItemClick(ListView l, View v, int position, long id) {
 

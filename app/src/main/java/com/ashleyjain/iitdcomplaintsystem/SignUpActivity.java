@@ -97,6 +97,8 @@ public class SignUpActivity extends AppCompatActivity implements AdapterView.OnI
 
 
         final String[] fn = new String[1];final String[] ln = new String[1]; final String[] un = new String[1]; final String[] dp = new String[1];  final String[] pw = new String[1];
+
+        //register button
         signup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
