@@ -57,21 +57,15 @@
         <Spinner
             android:id="@+id/spinnerHostel"
             android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:layout_below="@+id/username"
+            android:layout_height="wrap_content"
             android:prompt="@string/spinner_title"
             android:background="#1effffff" />
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/department"
-            android:hint="Department"/>
+
         <RadioGroup xmlns:android="http://schemas.android.com/apk/res/android"
             android:layout_width="fill_parent"
-            android:layout_height="50dp"
-            android:orientation="horizontal"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
             android:id="@+id/radioGroup"
-            android:layout_below="@+id/department"
             android:layout_alignParentStart="true"
             android:layout_marginTop="20dp"
             android:background="#1effffff">
@@ -86,10 +80,16 @@
                 android:textColor="#ffffff"
                 android:textSize="20dp" />
 
-            <RadioButton android:id="@+id/admin"
+            <RadioButton android:id="@+id/instituteadmin"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Administrator"
+                android:text="InstituteAdmin"
+                android:onClick="onRadioButtonClicked"/>
+            <RadioButton android:id="@+id/hosteladmin"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="HostelAdmin"
+                android:checked="true"
                 android:onClick="onRadioButtonClicked"/>
             <RadioButton android:id="@+id/normal"
                 android:layout_width="wrap_content"
@@ -98,6 +98,13 @@
                 android:checked="true"
                 android:onClick="onRadioButtonClicked"/>
         </RadioGroup>
+
+        <Spinner
+            android:id="@+id/spinnerDepartment"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:prompt="@string/spinner_title"
+            android:background="#1effffff" />
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -115,7 +122,6 @@
         android:id="@+id/sign_up"
         android:background="#96ffffff"
         android:layout_below="@+id/EditTextLayout"
-        android:layout_alignParentStart="true"
         android:layout_marginLeft="@dimen/activity_horizontal_margin"
         android:layout_marginRight="@dimen/activity_horizontal_margin"
         android:textColor="#d15555"
