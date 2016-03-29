@@ -85,7 +85,8 @@ public class InstituteComplaintList extends ListFragment {
         Intent myIntent = new Intent(getContext(), SpecificComplaint.class);
         myIntent.putExtra("id",complaintId[position]);
         MainActivity mainActivity = (MainActivity) getActivity();
-        myIntent.putExtra("current_user_id",mainActivity.current_user_id);
+        iitcomplaint_app app = (iitcomplaint_app) mainActivity.getApplication();
+        myIntent.putExtra("current_user_id",app.getLocalHost());
         startActivity(myIntent);
         super.onListItemClick(l, v, position, id);
     }

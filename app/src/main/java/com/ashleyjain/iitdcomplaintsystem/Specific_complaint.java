@@ -66,9 +66,9 @@ public class Specific_complaint extends ListFragment {
                     Title.setText(title);
                     Description.setText(description);
 
-                    SpecificComplaint specificComplaint = (SpecificComplaint) getActivity();
+                    final iitcomplaint_app app = (iitcomplaint_app) getActivity().getApplicationContext();
 
-                    if(created_by.equals(specificComplaint.current_user_id)){
+                    if(created_by.equals(app.getLocalHost())){
                         editButton.setVisibility(View.VISIBLE);
                     }
 
