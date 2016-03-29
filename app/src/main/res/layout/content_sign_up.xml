@@ -1,130 +1,138 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
-    app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context="com.ashleyjain.iitdcomplaintsystem.SignUpActivity"
-    tools:showIn="@layout/activity_sign_up"
-    android:background="@color/colorPrimaryLight">
+    android:layout_height="wrap_content"
+    android:background="@color/colorPrimary">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Complaint System"
-        android:id="@+id/textView2"
-        android:textSize="40sp"
-        android:textStyle="bold"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:textColor="#f0f0f0"
-        android:typeface="serif" />
-    <LinearLayout
-        android:id="@+id/EditTextLayout"
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_below="@+id/textView2"
-        android:layout_marginTop="25dp"
-        android:layout_marginLeft="@dimen/activity_horizontal_margin"
-        android:layout_marginRight="@dimen/activity_horizontal_margin"
-        android:background="#64ffffff"
-        android:paddingLeft="10dp"
-        android:paddingRight="10dp"
-        android:paddingTop="10dp"
-        android:paddingBottom="10dp"
+        android:layout_height="match_parent"
+        android:paddingBottom="@dimen/activity_vertical_margin"
+        android:paddingLeft="@dimen/activity_horizontal_margin"
+        android:paddingRight="@dimen/activity_horizontal_margin"
+        android:paddingTop="@dimen/activity_vertical_margin"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        tools:context="com.ashleyjain.iitdcomplaintsystem.SignUpActivity"
+        tools:showIn="@layout/activity_sign_up"
         >
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/firstname"
-            android:hint="First Name"/>
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/lastname"
-            android:hint="Last Name"/>
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/username"
-            android:hint="Username"/>
-        <Spinner
-            android:id="@+id/spinnerHostel"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:prompt="@string/spinner_title"
-            android:background="#1effffff" />
 
-        <RadioGroup xmlns:android="http://schemas.android.com/apk/res/android"
-            android:layout_width="fill_parent"
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Complaint System"
+            android:id="@+id/textView2"
+            android:textSize="40sp"
+            android:textStyle="bold"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:textColor="#f0f0f0"
+            android:typeface="serif" />
+        <LinearLayout
+            android:id="@+id/EditTextLayout"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:id="@+id/radioGroup"
-            android:layout_alignParentStart="true"
-            android:layout_marginTop="20dp"
-            android:background="#1effffff">
+            android:layout_below="@+id/textView2"
+            android:layout_marginTop="25dp"
+            android:layout_marginLeft="@dimen/activity_horizontal_margin"
+            android:layout_marginRight="@dimen/activity_horizontal_margin"
+            android:background="#64ffffff"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"
+            >
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/firstname"
+                android:hint="First Name"/>
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/lastname"
+                android:hint="Last Name"/>
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/username"
+                android:hint="Username"/>
+            <Spinner
+                android:id="@+id/spinnerHostel"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:prompt="@string/spinner_title"
+                android:background="#1effffff" />
 
-            <TextView
-                android:layout_width="wrap_content"
+            <RadioGroup xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:text="Type:"
-                android:id="@+id/typee"
-                android:layout_below="@+id/radioGroup"
-                android:layout_centerHorizontal="true"
-                android:textColor="#f0f0f0"
-                android:textSize="20dp" />
+                android:orientation="vertical"
+                android:id="@+id/radioGroup"
+                android:layout_alignParentStart="true"
+                android:layout_marginTop="20dp"
+                android:background="#1effffff">
 
-            <RadioButton android:id="@+id/instituteadmin"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="InstituteAdmin"
-                android:onClick="onRadioButtonClicked"/>
-            <RadioButton android:id="@+id/hosteladmin"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="HostelAdmin"
-                android:checked="true"
-                android:onClick="onRadioButtonClicked"/>
-            <RadioButton android:id="@+id/normal"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Normal"
-                android:checked="true"
-                android:onClick="onRadioButtonClicked"/>
-        </RadioGroup>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Type:"
+                    android:id="@+id/typee"
+                    android:layout_below="@+id/radioGroup"
+                    android:layout_centerHorizontal="true"
+                    android:textColor="#f0f0f0"
+                    android:textSize="20dp" />
 
-        <Spinner
-            android:id="@+id/spinnerDepartment"
+                <RadioButton android:id="@+id/instituteadmin"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="InstituteAdmin"
+                    android:onClick="onRadioButtonClicked"/>
+                <RadioButton android:id="@+id/hosteladmin"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="HostelAdmin"
+                    android:checked="true"
+                    android:onClick="onRadioButtonClicked"/>
+                <RadioButton android:id="@+id/normal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Normal"
+                    android:checked="true"
+                    android:onClick="onRadioButtonClicked"/>
+            </RadioGroup>
+
+            <Spinner
+                android:layout_margin="5dp"
+                android:id="@+id/spinnerDepartment"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:prompt="@string/spinner_title"
+                android:background="#1effffff" />
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textPassword"
+                android:ems="10"
+                android:id="@+id/password"
+                android:hint="Password"/>
+
+        </LinearLayout>
+
+        <Button
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:prompt="@string/spinner_title"
-            android:background="#1effffff" />
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:inputType="textPassword"
-            android:ems="10"
-            android:id="@+id/password"
-            android:hint="Password"/>
+            android:text="SIGN UP"
+            android:id="@+id/sign_up"
+            android:background="#96ffffff"
+            android:layout_below="@+id/EditTextLayout"
+            android:layout_marginLeft="@dimen/activity_horizontal_margin"
+            android:layout_marginRight="@dimen/activity_horizontal_margin"
+            android:textColor="#f0f0f0"
+            android:textStyle="bold" />
 
-    </LinearLayout>
-
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="SIGN UP"
-        android:id="@+id/sign_up"
-        android:background="#96ffffff"
-        android:layout_below="@+id/EditTextLayout"
-        android:layout_marginLeft="@dimen/activity_horizontal_margin"
-        android:layout_marginRight="@dimen/activity_horizontal_margin"
-        android:textColor="#f0f0f0"
-        android:textStyle="bold" />
-
-</RelativeLayout>
+    </RelativeLayout>
+</ScrollView>

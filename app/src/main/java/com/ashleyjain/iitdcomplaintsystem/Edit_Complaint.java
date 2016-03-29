@@ -79,7 +79,7 @@ public class Edit_Complaint extends Fragment {
                                 Toast.makeText(getActivity(), "Fail!!! Try Again!!", Toast.LENGTH_LONG).show();
                             } else {
                                 System.out.println("==================updated===========================");
-                                getActivity().onBackPressed();
+                                getFragmentManager().popBackStack();
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();
