@@ -22,7 +22,7 @@ import org.json.JSONObject;
 public class Edit_Complaint extends Fragment {
 
     Button submitButton,deleteButton;
-    String stringtitle,stringdescription;
+    String stringtitle,stringdescription,complaint_id;
     EditText tittle,description;
 
     public Edit_Complaint() {
@@ -42,6 +42,7 @@ public class Edit_Complaint extends Fragment {
     public void onViewCreated(View v, Bundle savedInstanceState){
         super.onViewCreated(v, savedInstanceState);
 
+        complaint_id = getArguments().getString("cId");
         stringtitle = getArguments().getString("title");
         stringdescription = getArguments().getString("description");
 
@@ -62,7 +63,7 @@ public class Edit_Complaint extends Fragment {
                 stringdescription = description.getText().toString();
                 stringdescription = stringdescription.replace(' ', '+');
                 final ProgressDialog dialog = ProgressDialog.show(getActivity(), "", "Updating...", true);
-                String url = "http://" + LoginActivity.ip + "/first/complaint/edit_complaint.json?complaint_id=";
+                String url = "http://" + LoginActivity.ip + "/first/complaint/update_complaint.json?complaint_id="+complaint_id+"&description="+stringdescription+"&title="+stringtitle;
                 //GET request through stringrequest
                 GETrequest.response(new GETrequest.VolleyCallback() {
                     @Override
@@ -77,11 +78,8 @@ public class Edit_Complaint extends Fragment {
                                 //user inputs are wrong
                                 Toast.makeText(getActivity(), "Fail!!! Try Again!!", Toast.LENGTH_LONG).show();
                             } else {
-                                TextView votesText = (TextView) getView().findViewById(R.id.no_of_votes);
-                                if (votes == null) {
-                                } else {
-                                    votesText.setText(votes.toString());
-                                }
+                                System.out.println("==================updated===========================");
+                                getActivity().onBackPressed();
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();
@@ -98,7 +96,7 @@ public class Edit_Complaint extends Fragment {
             @Override
             public void onClick(View v) {
                 final ProgressDialog dialog = ProgressDialog.show(getActivity(), "", "Deleting...", true);
-                String url = "http://" + LoginActivity.ip + "/first/complaint/edit_complaint.json?complaint_id=";
+                String url = "http://" + LoginActivity.ip + "/first/complaint/delete_complaint.json?complaint_id="+complaint_id;
                 //GET request through stringrequest
                 GETrequest.response(new GETrequest.VolleyCallback() {
                     @Override
@@ -108,16 +106,13 @@ public class Edit_Complaint extends Fragment {
                             JSONObject jsonObject = new JSONObject(result);
                             String success = jsonObject.getString("success");
                             Integer votes = jsonObject.getInt("no_of_votes");
-                            System.out.println("<<<<<-----votes--->>>>>>>>>>>>>" + votes);
                             if (success == "false") {
                                 //user inputs are wrong
                                 Toast.makeText(getActivity(), "Fail!!! Try Again!!", Toast.LENGTH_LONG).show();
                             } else {
-                                TextView votesText = (TextView) getView().findViewById(R.id.no_of_votes);
-                                if (votes == null) {
-                                } else {
-                                    votesText.setText(votes.toString());
-                                }
+                                System.out.println("==================deleted===========================");
+                                getFragmentManager().popBackStack();
+                                getActivity().onBackPressed();
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();

@@ -35,7 +35,7 @@ public class Specific_complaint extends ListFragment {
         // Required empty public constructor
     }
 
-    String title,description,created_at,created_by,com;
+    String title,description,created_at,created_by,com,complaint_id;
     String[] commentDescription,commentCreatedAt,commentCreatedBy;
     Integer[] commentId;
     Integer no_of_vote;
@@ -63,6 +63,7 @@ public class Specific_complaint extends ListFragment {
                     no_of_vote = complaintObj.getInt("no_of_votes");
                     created_at = complaintObj.getString("created_at");
                     created_by = complaintObj.getString("user_id");
+                    complaint_id = complaintObj.getString("id");
                     Title = (TextView) getActivity().findViewById(R.id.title);
                     Description = (TextView) getActivity().findViewById(R.id.description);
                     n_o_v = (TextView) getActivity().findViewById(R.id.no_of_votes);
@@ -170,6 +171,7 @@ public class Specific_complaint extends ListFragment {
                             Bundle bundle = new Bundle();
                             bundle.putString("title",title );
                             bundle.putString("description",description );
+                            bundle.putString("cId",complaint_id);
                             fragment.setArguments(bundle);
                             ft.addToBackStack(ft.toString());
                             ft.replace(R.id.fragment_container ,fragment);

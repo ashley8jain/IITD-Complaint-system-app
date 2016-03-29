@@ -54,7 +54,7 @@ public class complaintObjectAdapter extends BaseAdapter {
         TextView Votes = (TextView) convertView.findViewById(R.id.no_of_votes);
         LinearLayout complaintColorCode = (LinearLayout) convertView.findViewById(R.id.complaintColorCode);
 
-        Integer[] colors = {0xFF3F51B5,0xFFFF6600,0xFF009900,0xFFFF6600,0xFF33CCFF};
+        Integer[] colors = {0xFFEDD9C0,0xFFC9D8C5,0xFFA8B6BF,0xFF7D4627,0xFF9AD3DE};
 
         complaintObject assign_row = complaintList.get(position);
         // setting the image resource and title
@@ -65,7 +65,7 @@ public class complaintObjectAdapter extends BaseAdapter {
 
         Integer s = assign_row.getDepartment_();
         if ( s==null ){
-            complaintColorCode.setBackgroundColor(0xFFA6A6A6);
+            complaintColorCode.setBackgroundColor(0xFFC9C9C9);
         }
         else{
             complaintColorCode.setBackgroundColor(colors[s-1]);

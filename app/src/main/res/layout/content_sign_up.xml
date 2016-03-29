@@ -11,7 +11,7 @@
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="com.ashleyjain.iitdcomplaintsystem.SignUpActivity"
     tools:showIn="@layout/activity_sign_up"
-    android:background="#d05050">
+    android:background="@color/colorPrimaryLight">
 
     <TextView
         android:layout_width="wrap_content"
@@ -22,7 +22,7 @@
         android:textStyle="bold"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:textColor="#80ffffff"
+        android:textColor="#f0f0f0"
         android:typeface="serif" />
     <LinearLayout
         android:id="@+id/EditTextLayout"
@@ -83,7 +83,7 @@
                 android:id="@+id/typee"
                 android:layout_below="@+id/radioGroup"
                 android:layout_centerHorizontal="true"
-                android:textColor="#ffffff"
+                android:textColor="#f0f0f0"
                 android:textSize="20dp" />
 
             <RadioButton android:id="@+id/admin"
@@ -118,7 +118,7 @@
         android:layout_alignParentStart="true"
         android:layout_marginLeft="@dimen/activity_horizontal_margin"
         android:layout_marginRight="@dimen/activity_horizontal_margin"
-        android:textColor="#d15555"
+        android:textColor="#f0f0f0"
         android:textStyle="bold" />
 
 </RelativeLayout>

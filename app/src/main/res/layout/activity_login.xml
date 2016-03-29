@@ -7,19 +7,21 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.ashleyjain.iitdcomplaintsystem.LoginActivity"
-    android:background="#d05050">
+    tools:context="com.ashleyjain.moodleapp.MainActivity"
+    android:background="@color/colorPrimaryLight">
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Complaint System"
+        android:text="IITD Complaint System"
         android:id="@+id/textView2"
-        android:textSize="40sp"
+        android:textSize="50sp"
         android:textStyle="bold"
+        android:padding="10dp"
+        android:layout_marginTop="50dp"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:textColor="#80ffffff" />
+        android:textColor="#F0F0F0" />
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -27,17 +29,16 @@
         android:id="@+id/textView3"
         android:layout_below="@+id/textView2"
         android:layout_centerHorizontal="true"
-        android:textColor="#99ffffff" />
+        android:textColor="#F0F0F0" />
     <LinearLayout
         android:id="@+id/EditTextLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:layout_below="@+id/textView3"
-        android:layout_marginTop="25dp"
-        android:layout_marginLeft="@dimen/activity_horizontal_margin"
-        android:layout_marginRight="@dimen/activity_horizontal_margin"
-        android:background="#50ffffff"
+        android:layout_marginRight="22dp"
+        android:layout_marginLeft="22dp"
+        android:layout_marginTop="20dp"
         android:paddingLeft="10dp"
         android:paddingRight="10dp"
         android:paddingTop="10dp"
@@ -45,42 +46,52 @@
         >
         <EditText
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="40dp"
+            android:background="#ffffff"
+            android:padding="10dp"
             android:id="@+id/userid"
             android:hint="Username"
-            android:text="ashley"/>
+            android:textColorHint="@color/colorPrimaryLight"
+            android:layout_margin="10dp"/>
 
         <EditText
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="40dp"
             android:inputType="textPassword"
+            android:layout_margin="10dp"
+            android:background="#ffffff"
+            android:padding="10dp"
             android:ems="10"
+            android:textColorHint="@color/colorPrimaryLight"
             android:id="@+id/password"
-            android:text="ipodnano"
             android:hint="Password"/>
     </LinearLayout>
 
     <Button
-        android:layout_width="match_parent"
+        android:padding="10dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
         android:text="Login"
         android:id="@+id/button"
-        android:background="#96ffffff"
+        android:backgroundTint="#283018"
         android:layout_below="@+id/EditTextLayout"
-        android:layout_alignParentStart="true"
-        android:layout_marginLeft="@dimen/activity_horizontal_margin"
-        android:layout_marginRight="@dimen/activity_horizontal_margin"
-        android:textColor="#d15555"
-        android:textStyle="bold" />
+        android:textColor="#FFFFFF" />
 
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:padding="10dp"
         android:text="Don&apos;t have an account? Sign Up!"
         android:id="@+id/textView"
-        android:textColor="#99ffffff"
+        android:textColor="#f0f0f0"
         android:layout_below="@+id/button"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="25dp" />
+        android:layout_marginTop="16dp" />
+
+
+
+
+
 </RelativeLayout>
