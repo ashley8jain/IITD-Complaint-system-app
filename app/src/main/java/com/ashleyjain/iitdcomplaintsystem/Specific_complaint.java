@@ -29,7 +29,7 @@ public class Specific_complaint extends ListFragment {
     public  Integer cId;
     TextView Title,Description,n_o_v;
     commentObjectAdapter adapter;
-    ImageButton upvote,downvote;
+    ImageButton upvote,downvote,editButton;
     public Specific_complaint() {
         // Required empty public constructor
     }
@@ -61,9 +61,16 @@ public class Specific_complaint extends ListFragment {
                     n_o_v = (TextView) getActivity().findViewById(R.id.no_of_votes);
                     upvote = (ImageButton) getActivity().findViewById(R.id.upvote);
                     downvote = (ImageButton) getActivity().findViewById(R.id.downvote);
+                    editButton = (ImageButton) getView().findViewById(R.id.edit_button_cond);
 
                     Title.setText(title);
                     Description.setText(description);
+
+                    SpecificComplaint specificComplaint = (SpecificComplaint) getActivity();
+
+                    if(created_by==specificComplaint.current_user_id){
+                        editButton.setVisibility(View.VISIBLE);
+                    }
 
                     JSONArray comments = jsonObject.getJSONArray("comments");
                     commentDescription = new String[comments.length()];
@@ -142,6 +149,18 @@ public class Specific_complaint extends ListFragment {
                                     }
                                 }
                             }, getActivity(), url, dialog);
+                        }
+                    });
+
+                    //edit onClickListener
+                    editButton.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            Fragment fragment = (Fragment)( new Edit_Complaint());
+                            FragmentTransaction ft = getFragmentManager().beginTransaction();
+                            ft.addToBackStack(ft.toString());
+                            ft.replace(R.id.fragment_container ,fragment);
+                            ft.commit();
                         }
                     });
 

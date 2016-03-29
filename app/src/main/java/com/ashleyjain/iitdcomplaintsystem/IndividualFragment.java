@@ -82,6 +82,8 @@ public class IndividualFragment extends ListFragment {
 
         Intent myIntent = new Intent(getContext(), SpecificComplaint.class);
         myIntent.putExtra("id",complaintId[position]);
+        MainActivity mainActivity = (MainActivity) getActivity();
+        myIntent.putExtra("current_user_id",mainActivity.current_user_id);
         startActivity(myIntent);
 
         super.onListItemClick(l, v, position, id);

@@ -58,9 +58,10 @@ public class Complaint_list extends ListFragment {
                         compliantCreatedBy[i] = ass.getString("user_id");
                         complaintVotes[i] = ass.getInt("no_of_votes");
                         complaintId[i] = ass.getInt("id");
-                        compliantDepartment[i] = ass.getInt("department");
+                        compliantDepartment[i] = ass.getInt("department"); //async task
 
                     }
+
 
                 } catch (JSONException e) {
                     e.printStackTrace();
