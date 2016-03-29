@@ -23,10 +23,12 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class NotificationFragment extends Fragment {
+
     Boolean IsNotif = true;
     private JSONArray notifsJSON;
     private ListView listView;
     ArrayList<String> stringList = new ArrayList<String>();
+
     @Override
     public void onCreate(Bundle onSavedInstanceState){
         super.onCreate(onSavedInstanceState);
@@ -50,6 +52,7 @@ public class NotificationFragment extends Fragment {
 
 
         if(IsNotif) {
+            //new notification comes
             TextView tv = (TextView) view.findViewById(R.id.isNotif);
             Integer is_seen;
             for (int i = 0; i < notifsJSON.length(); i++) {
@@ -63,6 +66,7 @@ public class NotificationFragment extends Fragment {
                     e.printStackTrace();
                 }
             }
+
             tv.setText(String.format("You have %d notifications", stringList.size()));
             customAdapter adapter = new customAdapter(inflater.getContext(), stringList);
             listView.setAdapter(adapter);
@@ -88,30 +92,13 @@ public class NotificationFragment extends Fragment {
             });
         }
         else{
+            //no new notifications
             TextView tv = (TextView) view.findViewById(R.id.isNotif);
             tv.setText("You have 0 notifications");
         }
 
         return view;
     }
-
-
-//    @Override
-//    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-//        Scanner in = new Scanner(stringList.get(position)).useDelimiter("[^0-9]+");
-//        int integer = in.nextInt();
-//        Toast.makeText(context, "hello", Toast.LENGTH_LONG).show();
-//        FragmentManager fragmentManager = ((Activity) context).getFragmentManager();
-//        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-//        Specific_complaint fragment = new Specific_complaint();
-//        Bundle bundle = new Bundle();
-//        bundle.putInt("id", integer);
-//        fragment.setArguments(bundle);
-//        fragmentTransaction.addToBackStack(fragment.toString());
-//        fragmentTransaction.replace(R.id.fragment_container, fragment);
-//        fragmentTransaction.commit();
-//
-//    }
 
     private class customAdapter extends ArrayAdapter<String>   {
         private View v;
@@ -138,6 +125,7 @@ public class NotificationFragment extends Fragment {
             LayoutInflater inflater = (LayoutInflater) getActivity().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             v= inflater.inflate(android.R.layout.simple_list_item_1, null);
             TextView tv = (TextView) v.findViewById(android.R.id.text1);
+            //convert html text into normal string
             tv.setText(Html.fromHtml(stringArrayList.get(pos)));
             return v;
         }

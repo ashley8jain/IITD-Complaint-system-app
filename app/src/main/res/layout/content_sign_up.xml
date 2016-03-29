@@ -54,21 +54,50 @@
             android:layout_height="wrap_content"
             android:id="@+id/username"
             android:hint="Username"/>
-        <EditText
+        <Spinner
+            android:id="@+id/spinnerHostel"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/hostelname"
-            android:hint="Hostel Name"/>
+            android:layout_height="50dp"
+            android:layout_below="@+id/username"
+            android:prompt="@string/spinner_title"
+            android:background="#1effffff" />
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/department"
             android:hint="Department"/>
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/type"
-            android:hint="Type"/>
+        <RadioGroup xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="fill_parent"
+            android:layout_height="50dp"
+            android:orientation="horizontal"
+            android:id="@+id/radioGroup"
+            android:layout_below="@+id/department"
+            android:layout_alignParentStart="true"
+            android:layout_marginTop="20dp"
+            android:background="#1effffff">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Type:"
+                android:id="@+id/typee"
+                android:layout_below="@+id/radioGroup"
+                android:layout_centerHorizontal="true"
+                android:textColor="#ffffff"
+                android:textSize="20dp" />
+
+            <RadioButton android:id="@+id/admin"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Administrator"
+                android:onClick="onRadioButtonClicked"/>
+            <RadioButton android:id="@+id/normal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Normal"
+                android:checked="true"
+                android:onClick="onRadioButtonClicked"/>
+        </RadioGroup>
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -76,13 +105,7 @@
             android:ems="10"
             android:id="@+id/password"
             android:hint="Password"/>
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:inputType="textPassword"
-            android:ems="10"
-            android:id="@+id/confirmpassword"
-            android:hint="Confirm Password"/>
+
     </LinearLayout>
 
     <Button

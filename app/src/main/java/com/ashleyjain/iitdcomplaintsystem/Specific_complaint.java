@@ -30,9 +30,11 @@ public class Specific_complaint extends ListFragment {
     TextView Title,Description,n_o_v;
     commentObjectAdapter adapter;
     ImageButton upvote,downvote;
+
     public Specific_complaint() {
         // Required empty public constructor
     }
+
     String title,description,created_at,created_by,com;
     String[] commentDescription,commentCreatedAt,commentCreatedBy;
     Integer[] commentId;
@@ -41,13 +43,18 @@ public class Specific_complaint extends ListFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
+        //getting complaint_id
         cId = getArguments().getInt("id");
+
         String url = "http://"+LoginActivity.ip+"/first/default/spec_complaint.json/"+cId;
         final ProgressDialog dialog = ProgressDialog.show(getActivity(),"", "Loading.Please wait...", true);
+
+        //GET request through stringrequest
         GETrequest.response(new GETrequest.VolleyCallback() {
             @Override
             public void onSuccess(final String result) {
-                //dialog.dismiss();
+
                 try {
                     JSONObject jsonObject = new JSONObject(result);
                     JSONObject complaintObj = jsonObject.getJSONObject("complaint");
@@ -65,6 +72,7 @@ public class Specific_complaint extends ListFragment {
                     Title.setText(title);
                     Description.setText(description);
 
+                    //getting comments response json
                     JSONArray comments = jsonObject.getJSONArray("comments");
                     commentDescription = new String[comments.length()];
                     commentCreatedAt = new String[comments.length()];
@@ -119,6 +127,7 @@ public class Specific_complaint extends ListFragment {
                         public void onClick(View v) {
                             final ProgressDialog dialog = ProgressDialog.show(getActivity(), "", "Voting...", true);
                             String url = "http://" + LoginActivity.ip + "/first/complaint/upvote.json?type=-1&complaint_id=" + cId;
+
                             //GET request through stringrequest
                             GETrequest.response(new GETrequest.VolleyCallback() {
                                 @Override

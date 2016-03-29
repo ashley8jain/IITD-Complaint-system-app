@@ -33,7 +33,7 @@ public class LoginActivity extends AppCompatActivity {
     Button login;
     TextView signup;
 
-    public static final String ip = "10.192.42.105:8000";
+    public static final String ip = "10.192.40.180:8000";
     private static final String SET_COOKIE_KEY = "set-cookie";
     private static final String COOKIE_KEY = "cookie";
     private static final String SESSION_COOKIE = "session_id_first";
@@ -55,6 +55,7 @@ public class LoginActivity extends AppCompatActivity {
         _preferences = PreferenceManager.getDefaultSharedPreferences(this);  //for saving cookies
         _requestQueue = Volley.newRequestQueue(this);
 
+        //for custom text font
         Typeface font = Typeface.createFromAsset(getAssets(),"YuppySC-Regular.ttf");
 
         id = (EditText) findViewById(R.id.userid);
@@ -81,6 +82,7 @@ public class LoginActivity extends AppCompatActivity {
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                // check that given network is connected.....
                 if (!isNetworkConnected(context)) {
                     AlertDialog.Builder alertbuilder = new AlertDialog.Builder(context);
                     alertbuilder.setTitle("No Network Connection");

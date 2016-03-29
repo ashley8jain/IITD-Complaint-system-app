@@ -47,6 +47,7 @@ public class MainActivity extends AppCompatActivity  {
     boolean doubleBackToExitPressedOnce = false;
     FragmentManager fm;
 
+    //automatically refreshing page when creating complaint and selecting filter
     @Override
     protected void onRestart() {
         super.onRestart();
@@ -56,6 +57,7 @@ public class MainActivity extends AppCompatActivity  {
 
     }
 
+    //Back Button handling
     @Override
     public void onBackPressed() {
         if (doubleBackToExitPressedOnce) {
@@ -99,6 +101,7 @@ public class MainActivity extends AppCompatActivity  {
         return true;
     }
 
+    //toolbar button handling
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch(item.getItemId()){
@@ -163,38 +166,7 @@ public class MainActivity extends AppCompatActivity  {
                 .addToBackStack(fragment.toString())
                 .commit();
 
-//        TabLayout tabLayout = (TabLayout) findViewById(R.id.tab_layout);
-//
-//        tabLayout.addTab(tabLayout.newTab().setText("Individual"));
-//        tabLayout.addTab(tabLayout.newTab().setText("Hostel"));
-//        tabLayout.addTab(tabLayout.newTab().setText("Institute"));
-//
-//
-//
-//        final ViewPager viewPager = (ViewPager) findViewById(R.id.pager);
-//        final PagerAdapter adapter = new PagerAdapter(getSupportFragmentManager(), tabLayout.getTabCount());
-//        viewPager.setAdapter(adapter);
-//        viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
-//
-//
-//        tabLayout.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
-//            @Override
-//            public void onTabSelected(TabLayout.Tab tab) {
-//                viewPager.setCurrentItem(tab.getPosition());
-//
-//            }
-//
-//            @Override
-//            public void onTabUnselected(TabLayout.Tab tab) {
-//
-//            }
-//
-//            @Override
-//            public void onTabReselected(TabLayout.Tab tab) {
-//                viewPager.setCurrentItem(tab.getPosition());
-//            }
-//        });
-
+        //profile section in drawer layout
         headerResult = new AccountHeaderBuilder()
                 .withActivity(this)
                 .addProfiles(
@@ -249,6 +221,8 @@ public class MainActivity extends AppCompatActivity  {
                 }
             }
         };
+
+        //buttons handling in drawer
         final DrawerBuilder builder = new DrawerBuilder()
                 .withActivity(this)
                 .withDisplayBelowStatusBar(true)

@@ -1,7 +1,6 @@
 package com.ashleyjain.iitdcomplaintsystem;
 
 import android.app.ProgressDialog;
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -14,9 +13,7 @@ import android.view.View;
 
 public class SpecificComplaint extends AppCompatActivity {
 
-    Context context = SpecificComplaint.this;
     String notJSON;
-    String fullname,username;
     Integer cId;
 
     @Override
@@ -35,6 +32,7 @@ public class SpecificComplaint extends AppCompatActivity {
             }
         });
 
+        //transferring complaint id
         Bundle bundle = new Bundle();
         bundle.putInt("id",cId);
         Specific_complaint fragment = new Specific_complaint();

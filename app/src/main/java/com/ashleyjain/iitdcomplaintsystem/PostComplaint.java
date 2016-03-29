@@ -71,14 +71,13 @@ public class PostComplaint extends AppCompatActivity implements OnItemSelectedLi
             default:deptint = 1;
                     break;
         }
-        // Showing selected spinner item
-        //Toast.makeText(parent.getContext(), "Selected: " + department, Toast.LENGTH_LONG).show();
     }
 
     @Override
     public void onNothingSelected(AdapterView<?> parent) {
 
     }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -133,7 +132,6 @@ public class PostComplaint extends AppCompatActivity implements OnItemSelectedLi
                 newdesc = newdesc.replace(' ','+');
                 final ProgressDialog dialog = ProgressDialog.show(context, "", "Posting Complaint...", true);
 
-                //String url = "http://"+ LoginActivity.ip +"/first/complaint/new.json?title="+newtitle+"&description="+newdesc +department + level
                 String url = "http://"+ LoginActivity.ip +"/first/complaint/new.json?title="+newtitle+"&description="+newdesc+"&level="+level+"&complaint_dept="+deptint;
 
                 //GET request through stringrequest

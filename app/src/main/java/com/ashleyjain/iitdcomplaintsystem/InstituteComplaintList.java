@@ -19,24 +19,29 @@ import java.util.List;
 
 
 public class InstituteComplaintList extends ListFragment {
-    public String cCode;
+
     String[] complaintTitle,complaintDescription,compliantCreatedAt,compliantCreatedBy;
     int[] complaintId, complaintVotes;
     Integer[] compliantDepartment;
     private List<complaintObject> complaintObjectList;
     complaintObjectAdapter adapter;
     Integer filter = MainActivity.filter;
+
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
         String url = "http://"+LoginActivity.ip+"/first/default/home.json?level="+3+"&display_dept="+filter;
         final ProgressDialog dialog = ProgressDialog.show(getActivity(),"", "Loading.Please wait...", true);
+
+        //GET request through stringrequest
         GETrequest.response(new GETrequest.VolleyCallback() {
             @Override
             public void onSuccess(final String result) {
-                //dialog.dismiss();
                 try {
+
+                    //getting response json
                     JSONObject jsonObject = new JSONObject(result);
                     JSONArray arr = jsonObject.getJSONArray("my_hostel_complaints");
                     System.out.println(arr);
@@ -71,14 +76,17 @@ public class InstituteComplaintList extends ListFragment {
                     complaintObjectList.add(items);
 
                 }
-                System.out.println(complaintObjectList.size());
+
                 adapter = new complaintObjectAdapter(getActivity(), complaintObjectList);
                 setListAdapter(adapter);
 
             }
         }, getActivity(), url, dialog);
+
         return inflater.inflate(R.layout.fragment_complaint_list, container, false);
     }
+
+    //selecting specific complaint
     @Override
     public void onListItemClick(ListView l, View v, int position, long id) {
 
@@ -87,6 +95,7 @@ public class InstituteComplaintList extends ListFragment {
         startActivity(myIntent);
         super.onListItemClick(l, v, position, id);
     }
+
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);

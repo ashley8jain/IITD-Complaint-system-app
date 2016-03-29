@@ -1,20 +1,51 @@
 package com.ashleyjain.iitdcomplaintsystem;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.RadioButton;
+import android.widget.Spinner;
+import android.widget.Toast;
 
-public class SignUpActivity extends AppCompatActivity {
+import org.json.JSONException;
+import org.json.JSONObject;
 
-    EditText firstname,lastname,username,hostelname,department,type,password,confirmpassword;
+import java.util.ArrayList;
+import java.util.List;
+
+public class SignUpActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
+
+    EditText firstname,lastname,username,department,password;
     Button signup;
-
+    String hostel;
     Context context = SignUpActivity.this;
+    Integer typee=1;
+
+    public void onRadioButtonClicked(View view) {
+        // Is the button now checked?
+        boolean checked = ((RadioButton) view).isChecked();
+
+        // Check which radio button was clicked
+        switch(view.getId()) {
+            case R.id.admin:
+                if (checked)
+                    typee = 2;
+                break;
+            case R.id.normal:
+                if (checked)
+                    typee = 1;
+                break;
+        }
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -30,26 +61,44 @@ public class SignUpActivity extends AppCompatActivity {
         firstname = (EditText) findViewById(R.id.firstname);
         lastname = (EditText) findViewById(R.id.lastname);
         username = (EditText) findViewById(R.id.username);
-        hostelname = (EditText) findViewById(R.id.hostelname);
         department = (EditText) findViewById(R.id.department);
-        type = (EditText) findViewById(R.id.type);
         password = (EditText) findViewById(R.id.password);
-        confirmpassword = (EditText) findViewById(R.id.confirmpassword);
         signup = (Button) findViewById(R.id.sign_up);
-        firstname.setTypeface(font);lastname.setTypeface(font);username.setTypeface(font);hostelname.setTypeface(font);department.setTypeface(font);signup.setTypeface(font);
+        firstname.setTypeface(font);lastname.setTypeface(font);username.setTypeface(font);department.setTypeface(font);signup.setTypeface(font);
 
         firstname.addTextChangedListener(new checkError(firstname));
         lastname.addTextChangedListener(new checkError(lastname));
         username.addTextChangedListener(new checkError(username));
-        hostelname.addTextChangedListener(new checkError(hostelname));
         department.addTextChangedListener(new checkError(department));
-        type.addTextChangedListener(new checkError(type));
         password.addTextChangedListener(new checkError(password));
-        confirmpassword.addTextChangedListener(new checkError(confirmpassword));
+
+        // Spinner element
+        Spinner spinner = (Spinner) findViewById(R.id.spinnerHostel);
+
+        // Spinner click listener
+        spinner.setOnItemSelectedListener(this);
+
+        // Spinner Drop down elements
+        List<String> categories = new ArrayList<String>();
+        categories.add("Vindhyachal");
+        categories.add("Karakoram");
+        categories.add("Shivalik");
+        categories.add("Khailash");
+        categories.add("Kumaon");
+        // Creating adapter for spinner
+        ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, categories);
+
+        // Drop down layout style - list view with radio button
+        dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+        // attaching data adapter to spinner
+        spinner.setAdapter(dataAdapter);
 
 
 
-        final String[] fn = new String[1];final String[] ln = new String[1]; final String[] un = new String[1]; final String[] hn = new String[1]; final String[] dp = new String[1]; final String[] tp = new String[1]; final String[] pw = new String[1]; final String[] cnpw = new String[1];
+        final String[] fn = new String[1];final String[] ln = new String[1]; final String[] un = new String[1]; final String[] dp = new String[1];  final String[] pw = new String[1];
+
+        //register button
         signup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -58,25 +107,31 @@ public class SignUpActivity extends AppCompatActivity {
                 fn[0] = firstname.getText().toString();
                 ln[0] = lastname.getText().toString();
                 un[0] = username.getText().toString();
-                hn[0] = hostelname.getText().toString();
                 dp[0] = department.getText().toString();
-                tp[0] = type.getText().toString();
                 pw[0] = password.getText().toString();
-                cnpw[0] = confirmpassword.getText().toString();
 
-//                final ProgressDialog dialog = ProgressDialog.show(context, "", "Signing Up...", true);
-//                String url = "http://"+ LoginActivity.ip +"/first/signup.json?";
-//                //GET request through stringrequest
-//                GETrequest.response(new GETrequest.VolleyCallback() {
-//                    @Override
-//                    public void onSuccess(String result) {
-//                        try {
-//                            JSONObject jsonObject = new JSONObject(result);
-//                        } catch (JSONException e) {
-//                            e.printStackTrace();
-//                        }
-//                    }
-//                }, context, url, dialog);
+                final ProgressDialog dialog = ProgressDialog.show(context, "", "Signing Up...", true);
+                String url = "http://"+ LoginActivity.ip +"/first/default/register.json?first_name="+fn[0]+"&last_name="+ln[0]+"&hostel_name="+hostel+"&department="+dp[0]+"&type_="+typee+"&password=i"+pw[0]+"&username="+un[0];
+                //GET request through stringrequest
+                GETrequest.response(new GETrequest.VolleyCallback() {
+                    @Override
+                    public void onSuccess(String result) {
+                        try {
+                            JSONObject jsonObject = new JSONObject(result);
+                            String success = jsonObject.getString("success");
+                            String message = jsonObject.getString("message");
+                            if(success=="true"){
+                                Toast.makeText(getApplicationContext(), "Registered!!", Toast.LENGTH_LONG).show();
+                                finish();
+                            }
+                            else{
+                                Toast.makeText(getApplicationContext(), message, Toast.LENGTH_LONG).show();
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }, context, url, dialog);
 
 
             }
@@ -89,4 +144,16 @@ public class SignUpActivity extends AppCompatActivity {
 
     }
 
+    @Override
+    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+        // On selecting a spinner item
+        hostel = parent.getItemAtPosition(position).toString();
+        // Showing selected spinner item
+        //Toast.makeText(parent.getContext(), "Selected: " + department, Toast.LENGTH_LONG).show();
+    }
+
+    @Override
+    public void onNothingSelected(AdapterView<?> parent) {
+
+    }
 }
