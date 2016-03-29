@@ -26,6 +26,7 @@ import com.mikepenz.materialdrawer.AccountHeaderBuilder;
 import com.mikepenz.materialdrawer.Drawer;
 import com.mikepenz.materialdrawer.DrawerBuilder;
 import com.mikepenz.materialdrawer.interfaces.OnCheckedChangeListener;
+import com.mikepenz.materialdrawer.model.PrimaryDrawerItem;
 import com.mikepenz.materialdrawer.model.ProfileDrawerItem;
 import com.mikepenz.materialdrawer.model.ProfileSettingDrawerItem;
 import com.mikepenz.materialdrawer.model.SecondaryDrawerItem;
@@ -109,7 +110,7 @@ public class MainActivity extends AppCompatActivity  {
                     public void onSuccess(String notResult) {
                         System.out.println(notResult);
                         notJSON = notResult;
-                        if (!((getFragmentManager().findFragmentById(R.id.pager)) instanceof NotificationFragment)) {
+                        if (!((getSupportFragmentManager().findFragmentById(R.id.fragment_not)) instanceof NotificationFragment)) {
                             NotificationFragment notifFragment = new NotificationFragment();
                             Bundle bundle = new Bundle();
                             Boolean IsNotif = false;
@@ -119,8 +120,8 @@ public class MainActivity extends AppCompatActivity  {
                             }
                             bundle.putBoolean("IsNotif", IsNotif);
                             notifFragment.setArguments(bundle);
-                            getFragmentManager().beginTransaction()
-                                    .replace(R.id.pager, notifFragment, notifFragment.toString())
+                            getSupportFragmentManager().beginTransaction()
+                                    .replace(R.id.fragment_not, notifFragment, notifFragment.toString())
                                     .addToBackStack(notifFragment.toString())
                                     .commit();
                         }
@@ -156,37 +157,43 @@ public class MainActivity extends AppCompatActivity  {
             }
         });
 
-        TabLayout tabLayout = (TabLayout) findViewById(R.id.tab_layout);
+        ViewpagerFragment fragment = new ViewpagerFragment();
+        getSupportFragmentManager().beginTransaction()
+                .replace(R.id.fragment_not,fragment,fragment.toString())
+                .addToBackStack(fragment.toString())
+                .commit();
 
-        tabLayout.addTab(tabLayout.newTab().setText("Individual"));
-        tabLayout.addTab(tabLayout.newTab().setText("Hostel"));
-        tabLayout.addTab(tabLayout.newTab().setText("Institute"));
-
-
-
-        final ViewPager viewPager = (ViewPager) findViewById(R.id.pager);
-        final PagerAdapter adapter = new PagerAdapter(getSupportFragmentManager(), tabLayout.getTabCount());
-        viewPager.setAdapter(adapter);
-        viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
-
-
-        tabLayout.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
-            @Override
-            public void onTabSelected(TabLayout.Tab tab) {
-                viewPager.setCurrentItem(tab.getPosition());
-
-            }
-
-            @Override
-            public void onTabUnselected(TabLayout.Tab tab) {
-
-            }
-
-            @Override
-            public void onTabReselected(TabLayout.Tab tab) {
-                viewPager.setCurrentItem(tab.getPosition());
-            }
-        });
+//        TabLayout tabLayout = (TabLayout) findViewById(R.id.tab_layout);
+//
+//        tabLayout.addTab(tabLayout.newTab().setText("Individual"));
+//        tabLayout.addTab(tabLayout.newTab().setText("Hostel"));
+//        tabLayout.addTab(tabLayout.newTab().setText("Institute"));
+//
+//
+//
+//        final ViewPager viewPager = (ViewPager) findViewById(R.id.pager);
+//        final PagerAdapter adapter = new PagerAdapter(getSupportFragmentManager(), tabLayout.getTabCount());
+//        viewPager.setAdapter(adapter);
+//        viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
+//
+//
+//        tabLayout.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+//            @Override
+//            public void onTabSelected(TabLayout.Tab tab) {
+//                viewPager.setCurrentItem(tab.getPosition());
+//
+//            }
+//
+//            @Override
+//            public void onTabUnselected(TabLayout.Tab tab) {
+//
+//            }
+//
+//            @Override
+//            public void onTabReselected(TabLayout.Tab tab) {
+//                viewPager.setCurrentItem(tab.getPosition());
+//            }
+//        });
 
         headerResult = new AccountHeaderBuilder()
                 .withActivity(this)
@@ -250,11 +257,11 @@ public class MainActivity extends AppCompatActivity  {
                 .withHasStableIds(true)
                 .addDrawerItems(
                         new SectionDrawerItem().withName("Filter"),
-                        new SecondaryDrawerItem().withName("General").withIdentifier(4),
-                        new SecondaryDrawerItem().withName("Maintenance").withIdentifier(5),
-                        new SecondaryDrawerItem().withName("Mess").withIdentifier(6),
-                        new SecondaryDrawerItem().withName("Sports").withIdentifier(7),
-                        new SecondaryDrawerItem().withName("Cultural").withIdentifier(8)
+                        new PrimaryDrawerItem().withName("General").withIdentifier(4).withIcon(R.drawable.ic_home_black_18dp),
+                        new PrimaryDrawerItem().withName("Maintenance").withIdentifier(5).withIcon(R.drawable.wrench),
+                        new PrimaryDrawerItem().withName("Mess").withIdentifier(6).withIcon(R.drawable.food),
+                        new PrimaryDrawerItem().withName("Sports").withIdentifier(7).withIcon(R.drawable.wrench),
+                        new PrimaryDrawerItem().withName("Cultural").withIdentifier(8).withIcon(R.drawable.ic_event_black_18dp)
                 );
 
 
@@ -267,23 +274,23 @@ public class MainActivity extends AppCompatActivity  {
 
                         if(position == 2){
                                 filter =1;
-                            viewPager.invalidate();
+                            //viewPager.invalidate();
                         }
                         if(position == 3){
                              filter =2;
-                             viewPager.invalidate();
+                             //viewPager.invalidate();
                         }
                         if(position == 4){
                              filter =3;
-                             viewPager.invalidate();
+                             //viewPager.invalidate();
                         }
                         if(position == 5){
                              filter =4;
-                             viewPager.invalidate();
+                             //viewPager.invalidate();
                         }
                         if(position == 6){
                              filter =5;
-                             viewPager.invalidate();
+                             //viewPager.invalidate();
                         }
                         Intent i = new Intent(MainActivity.this, MainActivity.class);  //your class
                         startActivity(i);

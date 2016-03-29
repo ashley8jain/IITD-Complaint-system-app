@@ -1,6 +1,7 @@
 package com.ashleyjain.iitdcomplaintsystem;
 
-import android.app.Fragment;
+import android.content.Intent;
+import android.support.v4.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.Context;
@@ -71,15 +72,18 @@ public class NotificationFragment extends Fragment {
                     System.out.println(position);
                     Scanner in = new Scanner(stringList.get(position)).useDelimiter("[^0-9]+");
                     int integer = in.nextInt();
-                    FragmentManager fragmentManager = getActivity().getFragmentManager();
-                    FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                    Specific_complaint fragment = new Specific_complaint();
-                    Bundle bundle = new Bundle();
-                    bundle.putInt("id", integer);
-                    fragment.setArguments(bundle);
-                    fragmentTransaction.addToBackStack(fragment.toString());
-                    fragmentTransaction.replace(R.id.fragment_container, fragment);
-                    fragmentTransaction.commit();
+                    Intent myIntent = new Intent(getContext(), SpecificComplaint.class);
+                    myIntent.putExtra("id",integer);
+                    startActivity(myIntent);
+//                    FragmentManager fragmentManager = getActivity().getFragmentManager();
+//                    FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+//                    Specific_complaint fragment = new Specific_complaint();
+//                    Bundle bundle = new Bundle();
+//                    bundle.putInt("id", integer);
+//                    fragment.setArguments(bundle);
+//                    fragmentTransaction.addToBackStack(fragment.toString());
+//                    fragmentTransaction.replace(R.id.fragment_not, fragment);
+//                    fragmentTransaction.commit();
                 }
             });
         }

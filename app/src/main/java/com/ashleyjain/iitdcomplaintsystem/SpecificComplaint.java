@@ -19,53 +19,6 @@ public class SpecificComplaint extends AppCompatActivity {
     String fullname,username;
     Integer cId;
 
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.toolbar, menu);
-        return true;
-    }
-
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item){
-        switch(item.getItemId()){
-            case R.id.notification:
-                String url3 = "http://"+LoginActivity.ip+"/first/default/notification.json";
-                final ProgressDialog dialog1 = ProgressDialog.show(this, "", "Fetching Details...", true);
-                GETrequest.response(new GETrequest.VolleyCallback() {
-                    @Override
-                    public void onSuccess(String notResult) {
-                        System.out.println(notResult);
-                        notJSON = notResult;
-                        if (!((getFragmentManager().findFragmentById(R.id.fragment_container)) instanceof NotificationFragment)) {
-                            NotificationFragment notifFragment = new NotificationFragment();
-                            Bundle bundle = new Bundle();
-                            Boolean IsNotif = false;
-                            if (notJSON != null) {
-                                bundle.putString("notJSON", notJSON);
-                                IsNotif = true;
-                            }
-                            bundle.putBoolean("IsNotif", IsNotif);
-                            notifFragment.setArguments(bundle);
-                            getFragmentManager().beginTransaction()
-                                    .replace(R.id.fragment_container, notifFragment, notifFragment.toString())
-                                    .addToBackStack(notifFragment.toString())
-                                    .commit();
-                        }
-                    }
-                }, this, url3, dialog1);
-                return true;
-
-            default:
-                // If we got here, the user's action was not recognized.
-                // Invoke the superclass to handle it.
-                return super.onOptionsItemSelected(item);
-        }
-    }
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

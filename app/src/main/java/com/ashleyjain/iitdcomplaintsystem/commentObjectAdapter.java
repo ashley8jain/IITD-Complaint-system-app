@@ -94,7 +94,7 @@ public class commentObjectAdapter extends BaseAdapter  {
                                 bundle.putInt("id", cId);
                                 fragment.setArguments(bundle);
                                 fragmentTransaction.addToBackStack(fragment.toString());
-                                fragmentTransaction.replace(R.id.pager, fragment);
+                                fragmentTransaction.replace(R.id.fragment_container, fragment);
                                 fragmentTransaction.commit();
 //                                Specific_complaint fragment = new Specific_complaint();
 //                                Bundle bundle = new Bundle();
