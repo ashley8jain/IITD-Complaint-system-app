@@ -5,7 +5,6 @@ import android.content.Context;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -15,6 +14,9 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.Toast;
+
+import com.ashleyjain.iitdcomplaintsystem.functions.GETrequest;
+import com.ashleyjain.iitdcomplaintsystem.functions.checkError;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -162,11 +164,10 @@ public class SignUpActivity extends AppCompatActivity  {
                             JSONObject jsonObject = new JSONObject(result);
                             String success = jsonObject.getString("success");
                             String message = jsonObject.getString("message");
-                            if(success=="true"){
+                            if (success == "true") {
                                 Toast.makeText(getApplicationContext(), "Registered!!", Toast.LENGTH_LONG).show();
                                 finish();
-                            }
-                            else{
+                            } else {
                                 Toast.makeText(getApplicationContext(), message, Toast.LENGTH_LONG).show();
                             }
                         } catch (JSONException e) {

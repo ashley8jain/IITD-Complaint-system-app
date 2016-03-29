@@ -14,6 +14,10 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.ashleyjain.iitdcomplaintsystem.adapter.commentObjectAdapter;
+import com.ashleyjain.iitdcomplaintsystem.functions.GETrequest;
+import com.ashleyjain.iitdcomplaintsystem.objects.commentObject;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -77,7 +81,7 @@ public class Specific_complaint extends ListFragment {
                     //getting comments response json
                     final iitcomplaint_app app = (iitcomplaint_app) getActivity().getApplicationContext();
 
-                    if(created_by.equals(app.getLocalHost())){
+                    if (created_by.equals(app.getuserid())) {
                         editButton.setVisibility(View.VISIBLE);
                     }
 
@@ -102,7 +106,7 @@ public class Specific_complaint extends ListFragment {
                         @Override
                         public void onClick(View v) {
                             final ProgressDialog dialog = ProgressDialog.show(getActivity(), "", "Voting...", true);
-                            String url = "http://"+ LoginActivity.ip +"/first/complaint/upvote.json?type=1&complaint_id="+cId;
+                            String url = "http://" + LoginActivity.ip + "/first/complaint/upvote.json?type=1&complaint_id=" + cId;
                             //GET request through stringrequest
                             GETrequest.response(new GETrequest.VolleyCallback() {
                                 @Override
@@ -117,8 +121,10 @@ public class Specific_complaint extends ListFragment {
                                             Toast.makeText(getActivity(), "Fail!!! Try Again!!", Toast.LENGTH_LONG).show();
                                         } else {
                                             TextView votesText = (TextView) getView().findViewById(R.id.no_of_votes);
-                                            if(votes==null){}
-                                            else{ votesText.setText(votes.toString()); }
+                                            if (votes == null) {
+                                            } else {
+                                                votesText.setText(votes.toString());
+                                            }
                                         }
                                     } catch (JSONException e) {
                                         e.printStackTrace();
@@ -145,14 +151,16 @@ public class Specific_complaint extends ListFragment {
                                         JSONObject jsonObject = new JSONObject(result);
                                         String success = jsonObject.getString("success");
                                         Integer votes = jsonObject.getInt("no_of_votes");
-                                        System.out.println("<<<<<-----votes--->>>>>>>>>>>>>"+ votes);
+                                        System.out.println("<<<<<-----votes--->>>>>>>>>>>>>" + votes);
                                         if (success == "false") {
                                             //user inputs are wrong
                                             Toast.makeText(getActivity(), "Fail!!! Try Again!!", Toast.LENGTH_LONG).show();
                                         } else {
                                             TextView votesText = (TextView) getView().findViewById(R.id.no_of_votes);
-                                            if(votes==null){}
-                                            else{ votesText.setText(votes.toString()); }
+                                            if (votes == null) {
+                                            } else {
+                                                votesText.setText(votes.toString());
+                                            }
                                         }
                                     } catch (JSONException e) {
                                         e.printStackTrace();
@@ -166,15 +174,15 @@ public class Specific_complaint extends ListFragment {
                     editButton.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
-                            Fragment fragment = (Fragment)( new Edit_Complaint());
+                            Fragment fragment = (Fragment) (new Edit_Complaint());
                             FragmentTransaction ft = getFragmentManager().beginTransaction();
                             Bundle bundle = new Bundle();
-                            bundle.putString("title",title );
-                            bundle.putString("description",description );
-                            bundle.putString("cId",complaint_id);
+                            bundle.putString("title", title);
+                            bundle.putString("description", description);
+                            bundle.putString("cId", complaint_id);
                             fragment.setArguments(bundle);
                             ft.addToBackStack(ft.toString());
-                            ft.replace(R.id.fragment_container ,fragment);
+                            ft.replace(R.id.fragment_container, fragment);
                             ft.commit();
                         }
                     });
@@ -187,7 +195,7 @@ public class Specific_complaint extends ListFragment {
                 commentObjectList = new ArrayList<commentObject>();
 
                 for (int i = 0; i < commentDescription.length; i++) {
-                    commentObject items = new commentObject(commentDescription[i],commentCreatedBy[i],commentCreatedAt[i],commentId[i]);
+                    commentObject items = new commentObject(commentDescription[i], commentCreatedBy[i], commentCreatedAt[i], commentId[i]);
                     commentObjectList.add(items);
 
                 }

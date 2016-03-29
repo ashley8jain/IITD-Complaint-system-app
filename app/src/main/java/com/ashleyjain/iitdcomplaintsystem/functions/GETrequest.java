@@ -1,4 +1,4 @@
-package com.ashleyjain.iitdcomplaintsystem;
+package com.ashleyjain.iitdcomplaintsystem.functions;
 
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -7,6 +7,7 @@ import android.widget.Toast;
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import com.ashleyjain.iitdcomplaintsystem.LoginActivity;
 
 /**
  * Created by ashleyjain on 26/03/16.

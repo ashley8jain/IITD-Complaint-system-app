@@ -1,4 +1,4 @@
-package com.ashleyjain.iitdcomplaintsystem;
+package com.ashleyjain.iitdcomplaintsystem.adapter;
 
 import android.app.Activity;
 import android.app.FragmentManager;
@@ -14,6 +14,12 @@ import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.ashleyjain.iitdcomplaintsystem.LoginActivity;
+import com.ashleyjain.iitdcomplaintsystem.R;
+import com.ashleyjain.iitdcomplaintsystem.Specific_complaint;
+import com.ashleyjain.iitdcomplaintsystem.functions.GETrequest;
+import com.ashleyjain.iitdcomplaintsystem.objects.commentObject;
 
 import org.json.JSONException;
 import org.json.JSONObject;

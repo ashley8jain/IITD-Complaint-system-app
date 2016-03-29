@@ -1,8 +1,12 @@
-package com.ashleyjain.iitdcomplaintsystem;
+package com.ashleyjain.iitdcomplaintsystem.adapter;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
+
+import com.ashleyjain.iitdcomplaintsystem.HostelComplaintList;
+import com.ashleyjain.iitdcomplaintsystem.InstituteComplaintList;
+import com.ashleyjain.iitdcomplaintsystem.fragments.IndividualFragment;
 
 public class PagerAdapter extends FragmentStatePagerAdapter {
     int NumOfTabs;

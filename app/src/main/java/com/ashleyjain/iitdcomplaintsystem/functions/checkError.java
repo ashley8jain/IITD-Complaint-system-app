@@ -1,4 +1,4 @@
-package com.ashleyjain.iitdcomplaintsystem;
+package com.ashleyjain.iitdcomplaintsystem.functions;
 
 import android.text.Editable;
 import android.text.TextWatcher;

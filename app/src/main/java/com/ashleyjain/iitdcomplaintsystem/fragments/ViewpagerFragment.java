@@ -1,15 +1,16 @@
-package com.ashleyjain.iitdcomplaintsystem;
+package com.ashleyjain.iitdcomplaintsystem.fragments;
 
-import android.content.Context;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
-import android.support.v4.app.FragmentManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import com.ashleyjain.iitdcomplaintsystem.MainActivity;
+import com.ashleyjain.iitdcomplaintsystem.R;
+import com.ashleyjain.iitdcomplaintsystem.adapter.PagerAdapter;
 
 
 public class ViewpagerFragment extends Fragment {

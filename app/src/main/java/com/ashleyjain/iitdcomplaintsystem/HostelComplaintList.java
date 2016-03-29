@@ -9,6 +9,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
 
+import com.ashleyjain.iitdcomplaintsystem.adapter.complaintObjectAdapter;
+import com.ashleyjain.iitdcomplaintsystem.functions.GETrequest;
+import com.ashleyjain.iitdcomplaintsystem.objects.complaintObject;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -41,7 +45,7 @@ public class HostelComplaintList extends ListFragment {
                     JSONObject jsonObject = new JSONObject(result);
                     JSONArray arr = jsonObject.getJSONArray("my_hostel_complaints");
                     System.out.println(arr);
-                    Integer len =  arr.length();
+                    Integer len = arr.length();
                     complaintTitle = new String[len];
                     complaintDescription = new String[len];
                     compliantCreatedAt = new String[len];
@@ -68,7 +72,7 @@ public class HostelComplaintList extends ListFragment {
 
                 for (int i = 0; i < complaintTitle.length; i++) {
                     String v = Integer.toString(complaintVotes[i]);
-                    complaintObject items = new complaintObject(complaintTitle[i],complaintDescription[i],v,compliantCreatedAt[i],compliantDepartment[i]);
+                    complaintObject items = new complaintObject(complaintTitle[i], complaintDescription[i], v, compliantCreatedAt[i], compliantDepartment[i]);
                     complaintObjectList.add(items);
 
                 }
@@ -89,7 +93,7 @@ public class HostelComplaintList extends ListFragment {
         myIntent.putExtra("id", complaintId[position]);
         MainActivity mainActivity = (MainActivity) getActivity();
         iitcomplaint_app app = (iitcomplaint_app) mainActivity.getApplication();
-        myIntent.putExtra("current_user_id",app.getLocalHost());
+        myIntent.putExtra("current_user_id",app.getuserid());
         startActivity(myIntent);
 
     }

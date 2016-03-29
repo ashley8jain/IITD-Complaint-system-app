@@ -1,7 +1,6 @@
 package com.ashleyjain.iitdcomplaintsystem;
 
 import android.app.AlertDialog;
-import android.app.Application;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -22,6 +21,7 @@ import android.widget.Toast;
 
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.Volley;
+import com.ashleyjain.iitdcomplaintsystem.functions.GETrequest;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -121,12 +121,12 @@ public class LoginActivity extends AppCompatActivity {
                                     final String lname = user.getString("last_name");
                                     final String username2 = user.getString("username");
                                     final String user_id = user.getString("id");
-                                    final String user_type=user.getString("type_");
-                                    if(user_type.equals(2)){
-                                    final String department = user.getString("department");
+                                    final String user_type = user.getString("type_");
+                                    if (user_type.equals(2)) {
+                                        final String department = user.getString("department");
                                         final String hostel_name = user.getString("hostel_name");
                                     }
-                                    if(user_type.equals(3)){
+                                    if (user_type.equals(3)) {
                                         final String department = user.getString("department");
                                     }
                                     final iitcomplaint_app app = (iitcomplaint_app) getApplicationContext();
@@ -135,7 +135,7 @@ public class LoginActivity extends AppCompatActivity {
                                     main2frag_intent.putExtra("name", fname + " " + lname);
                                     main2frag_intent.putExtra("username", username2);
                                     main2frag_intent.putExtra("current_user_id", user_id);
-                                    main2frag_intent.putExtra("type_",user_type);
+                                    main2frag_intent.putExtra("type_", user_type);
                                     startActivity(main2frag_intent);
                                 }
                             } catch (JSONException e) {

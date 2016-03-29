@@ -1,20 +1,15 @@
 package com.ashleyjain.iitdcomplaintsystem;
 
-import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 
 public class SpecificComplaint extends AppCompatActivity {
 
-    String notJSON;
-    String fullname,username,current_user_id;
+    String current_user_id;
     Integer cId;
 
     @Override

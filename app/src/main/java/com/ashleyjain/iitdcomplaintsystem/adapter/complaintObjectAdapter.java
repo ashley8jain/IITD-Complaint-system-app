@@ -1,4 +1,4 @@
-package com.ashleyjain.iitdcomplaintsystem;
+package com.ashleyjain.iitdcomplaintsystem.adapter;
 
 import android.app.Activity;
 import android.content.Context;
@@ -8,6 +8,9 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import com.ashleyjain.iitdcomplaintsystem.R;
+import com.ashleyjain.iitdcomplaintsystem.objects.complaintObject;
 
 import java.util.List;
 

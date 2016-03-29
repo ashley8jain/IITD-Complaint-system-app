@@ -8,7 +8,7 @@ import android.app.Application;
 public class iitcomplaint_app extends Application {
     private String current_user_id;
 
-    public String getLocalHost() {
+    public String getuserid() {
         return current_user_id;
     }
 

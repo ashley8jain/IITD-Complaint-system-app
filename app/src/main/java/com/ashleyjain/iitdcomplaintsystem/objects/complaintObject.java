@@ -1,4 +1,4 @@
-package com.ashleyjain.iitdcomplaintsystem;
+package com.ashleyjain.iitdcomplaintsystem.objects;
 
 /**
  * Created by chandudasari on 27/03/16.
@@ -26,7 +26,7 @@ public class complaintObject {
         this.department_ = department_;
     }
 
-    complaintObject(String title, String description, String no_of_votes, String created_at,Integer department_){
+    public complaintObject(String title, String description, String no_of_votes, String created_at, Integer department_){
         this.title = title;
         this.description = description;
         this.no_of_votes = no_of_votes;

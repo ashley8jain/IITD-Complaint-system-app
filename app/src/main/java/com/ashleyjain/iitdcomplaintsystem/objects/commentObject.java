@@ -1,4 +1,4 @@
-package com.ashleyjain.iitdcomplaintsystem;
+package com.ashleyjain.iitdcomplaintsystem.objects;
 
 /**
  * Created by chandudasari on 27/03/16.
@@ -25,7 +25,7 @@ public class commentObject {
     }
 
 
-    commentObject(String description, String created_by, String created_at ,Integer id){
+    public commentObject(String description, String created_by, String created_at, Integer id){
         this.description = description;
         this.created_by = created_by;
         this.created_at= created_at;
