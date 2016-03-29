@@ -61,14 +61,14 @@ public class Specific_complaint extends ListFragment {
                     n_o_v = (TextView) getActivity().findViewById(R.id.no_of_votes);
                     upvote = (ImageButton) getActivity().findViewById(R.id.upvote);
                     downvote = (ImageButton) getActivity().findViewById(R.id.downvote);
-                    editButton = (ImageButton) getView().findViewById(R.id.edit_button_cond);
+                    editButton = (ImageButton) getActivity().findViewById(R.id.edit_button_cond);
 
                     Title.setText(title);
                     Description.setText(description);
 
                     SpecificComplaint specificComplaint = (SpecificComplaint) getActivity();
 
-                    if(created_by==specificComplaint.current_user_id){
+                    if(created_by.equals(specificComplaint.current_user_id)){
                         editButton.setVisibility(View.VISIBLE);
                     }
 
@@ -158,6 +158,10 @@ public class Specific_complaint extends ListFragment {
                         public void onClick(View v) {
                             Fragment fragment = (Fragment)( new Edit_Complaint());
                             FragmentTransaction ft = getFragmentManager().beginTransaction();
+                            Bundle bundle = new Bundle();
+                            bundle.putString("title",title );
+                            bundle.putString("description",description );
+                            fragment.setArguments(bundle);
                             ft.addToBackStack(ft.toString());
                             ft.replace(R.id.fragment_container ,fragment);
                             ft.commit();
