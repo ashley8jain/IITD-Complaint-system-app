@@ -1,5 +1,9 @@
 # IITD Complaint system app
 
+This app allow student to view all grades course list,uploading assignments and course discussion room.
+
+[Doc.pdf](doc/document.pdf)
+
 ---
 
 ## Screenshots
