@@ -1,4 +1,5 @@
-# IITD Complaint system app
+# IITD Complaint system app <a href='https://play.google.com/store/apps/details?id=in.ac.iitd&hl=en' target='_blank' align="right"><img align="right" height='36' src='https://s20.postimg.org/muzx3w4jh/google_play_badge.png' /></a>
+
 
 The purpose of this project is implement a complaint management system for IITD, which allows its users to post complaints related to various aspects like the infrastructure, academics, sports, institute policy,etc. and also allows the institute administration to easily manage and resolve complaints, using various features of our app
 
